@@ -21,9 +21,12 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { label: "Work", href: "#work" },
+    { label: "Home", href: "#hero" },
     { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Clients", href: "#clients" },
+    { label: "Fourmeta", href: "#fourmeta" },
+    { label: "Feedback", href: "#feedback" },
+    { label: "Contacts", href: "#contact" },
   ];
 
   const scrollToSection = (href: string) => {
@@ -37,14 +40,14 @@ const Navigation = () => {
     <motion.nav
       style={{ backgroundColor: navBackground, opacity: navOpacity }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "backdrop-blur-md" : ""
+        isScrolled ? "backdrop-blur-md border-b border-border/60" : ""
       }`}
     >
       <div className="container-custom flex items-center justify-between h-20">
         {/* Logo */}
         <motion.a
           href="#"
-          className="font-grotesk text-lg font-medium tracking-tight text-foreground"
+          className="font-grotesk text-lg font-medium tracking-[0.08em] text-foreground uppercase"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -53,12 +56,12 @@ const Navigation = () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          Studio
+          AlexRodukov
         </motion.a>
 
         {/* Nav Links */}
         <motion.ul
-          className="flex items-center gap-8"
+          className="hidden md:flex items-center gap-7"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -89,6 +92,17 @@ const Navigation = () => {
             </motion.li>
           ))}
         </motion.ul>
+
+        {/* CTA */}
+        <motion.button
+          onClick={() => scrollToSection("#contact")}
+          className="hidden md:inline-flex items-center gap-2 text-small uppercase tracking-[0.3em] text-foreground border border-foreground/30 px-5 py-2.5 hover:border-foreground transition-colors"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        >
+          Let's talk
+        </motion.button>
       </div>
     </motion.nav>
   );

@@ -1,53 +1,96 @@
 import { motion } from "framer-motion";
 
 const Hero = () => {
-  const headlineWords = ["Creative", "Direction", "&", "Design"];
-
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      <div className="container-custom text-center">
-        {/* Main Headline */}
-        <motion.h1
-          className="text-hero font-grotesk font-medium text-foreground leading-[0.9] mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          {headlineWords.map((word, index) => (
+    <section id="hero" className="relative min-h-[100svh] flex items-start overflow-hidden pt-28 md:pt-32">
+      <div className="container-custom">
+        <div className="flex items-start gap-6 md:gap-10">
+          <div className="hidden md:flex flex-col items-center gap-4 pt-2">
+            <span className="text-small text-muted-foreground tracking-[0.4em]">9</span>
+            <span className="text-small text-muted-foreground tracking-[0.4em]">8</span>
+            <span className="text-small text-muted-foreground tracking-[0.4em]">7</span>
+            <span className="text-small text-muted-foreground tracking-[0.4em]">6</span>
+            <span className="text-small text-muted-foreground tracking-[0.4em]">5</span>
+            <span className="text-small text-muted-foreground tracking-[0.4em]">4</span>
+            <span className="text-small text-muted-foreground tracking-[0.4em]">3</span>
+            <span className="text-small text-muted-foreground tracking-[0.4em]">2</span>
+            <span className="text-small text-muted-foreground tracking-[0.4em]">1</span>
+            <div className="w-px h-12 bg-border" />
+          </div>
+
+          <div className="max-w-4xl">
+          <motion.span
+            className="label-text mb-6 block"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Hi, I’m Alex Rodukov
+          </motion.span>
+
+          {/* Main Headline */}
+          <motion.h1
+            className="text-hero font-grotesk font-medium text-foreground leading-[0.9] mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             <motion.span
-              key={index}
-              className="inline-block mr-[0.25em] last:mr-0"
+              className="block"
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.8,
-                delay: 0.3 + index * 0.12,
+                delay: 0.3,
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              {word}
+              Digital
             </motion.span>
-          ))}
-        </motion.h1>
+            <motion.span
+              className="block"
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.45,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              Strategist
+            </motion.span>
+          </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          className="text-subheading text-muted-foreground max-w-xl mx-auto font-light"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.9,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        >
-          We craft digital experiences that blend artistry with purpose
-        </motion.p>
+          {/* Description */}
+          <motion.p
+            className="text-subheading text-muted-foreground max-w-2xl font-light leading-relaxed mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.9,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          >
+            multi-disciplinary strategic consult working at the intersection between Business, Design & Digital.
+          </motion.p>
+
+          <motion.button
+            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+            className="inline-flex items-center gap-3 text-small uppercase tracking-widest text-foreground border border-foreground/30 px-6 py-3 hover:border-foreground transition-colors"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Let’s talk
+          </motion.button>
+          </div>
+        </div>
       </div>
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2"
+        className="absolute bottom-12 left-6 md:left-12 flex items-center gap-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.2 }}
@@ -64,6 +107,12 @@ const Hero = () => {
           <span className="label-text text-xs">Scroll</span>
           <div className="w-px h-12 bg-gradient-to-b from-muted-foreground to-transparent" />
         </motion.div>
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="hidden md:inline-flex text-small text-muted-foreground uppercase tracking-[0.4em] hover:text-foreground transition-colors"
+        >
+          Back to top
+        </button>
       </motion.div>
     </section>
   );

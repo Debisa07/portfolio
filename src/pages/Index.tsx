@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import Projects from "@/components/Projects";
 import About from "@/components/About";
+import Clients from "@/components/Clients";
+import Fourmeta from "@/components/Fourmeta";
+import Feedback from "@/components/Feedback";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -15,8 +17,10 @@ const Index = () => {
     >
       <Navigation />
       <Hero />
-      <Projects />
       <About />
+      <Clients />
+      <Fourmeta />
+      <Feedback />
       <Footer />
     </motion.main>
   );
