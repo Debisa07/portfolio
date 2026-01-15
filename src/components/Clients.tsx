@@ -46,20 +46,22 @@ const Clients = () => {
 
   return (
     <section id="clients" ref={sectionRef} className="section-padding">
-      <div className="container-custom border-t border-border pt-12">
+      <div className="container-custom">
         {/* Section Header */}
         <motion.div
-          className="mb-12"
+          className="mb-16"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="label-text mb-4 block">Collaborated with</span>
+          <h2 className="text-display font-grotesk font-normal text-foreground leading-[0.95]">
+            Collaborated with
+          </h2>
         </motion.div>
 
         {/* Clients Grid */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12 items-center justify-items-start"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 md:gap-14 items-center justify-items-start"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -67,9 +69,9 @@ const Clients = () => {
           {clients.map((client, index) => (
             <motion.div
               key={client.name}
-              className="flex items-center justify-start p-4 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              className="flex items-center justify-start p-2 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-500"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{
                 duration: 0.6,
                 delay: 0.1 + index * 0.1,
@@ -79,34 +81,10 @@ const Clients = () => {
               <img
                 src={client.logo}
                 alt={client.name}
-                className="max-w-full max-h-10 object-contain"
+                className="max-w-full max-h-8 md:max-h-9 object-contain"
               />
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Additional Text */}
-        <motion.div
-          className="mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <p className="text-body text-muted-foreground/70 leading-relaxed mb-8 max-w-2xl">
-            My team's accomplishments speak volumes: impressive numbers, inspiring stories.
-            We launch, transform, drive growth, fuel innovation. Tangible results, always.
-          </p>
-          <a
-            href="https://fourmeta.com/"
-            className="inline-flex items-center gap-3 text-small uppercase tracking-[0.3em] text-foreground hover:text-muted-foreground transition-colors duration-300"
-          >
-            <img
-              src="https://cdn.prod.website-files.com/642ab9cb69d01c2bbd371806/642d36bf75d75ba20d68e20d_fourmeta.svg"
-              alt="Fourmeta"
-              className="h-6"
-            />
-            <span>Fourmeta.com</span>
-          </a>
         </motion.div>
       </div>
     </section>

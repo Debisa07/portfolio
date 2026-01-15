@@ -55,63 +55,61 @@ const Feedback = () => {
 
   return (
     <section id="feedback" ref={sectionRef} className="section-padding">
-      <div className="container-custom border-t border-border pt-12">
+      <div className="container-custom">
         {/* Section Header */}
         <motion.div
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="max-w-2xl">
-            <span className="label-text mb-4 block">Feedback</span>
-            <h2 className="text-heading font-grotesk font-medium text-foreground">
-              I have always been dedicated to going above and beyond in my pursuit of excellence.
+          <div className="lg:col-span-4">
+            <h2 className="text-display font-grotesk font-normal text-foreground leading-[0.95]">
+              Feedback
             </h2>
-            <p className="text-body text-muted-foreground/70 mt-4">
-              The feedback from my clients serves as a true testament to my commitment and the age-old wisdom that actions speak louder than words.
-            </p>
           </div>
 
-          {/* Navigation */}
-          <div className="flex items-center gap-6">
-            <button 
-              onClick={prevTestimonial}
-              className="text-muted-foreground hover:text-foreground transition-colors p-2"
-              aria-label="Previous testimonial"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <span className="text-sm text-muted-foreground w-16 text-center">
-              {currentIndex + 1} / {testimonials.length}
-            </span>
-            <button 
-              onClick={nextTestimonial}
-              className="text-muted-foreground hover:text-foreground transition-colors p-2"
-              aria-label="Next testimonial"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <p className="text-body text-muted-foreground/70">
+              I have always been dedicated to going above and beyond in my pursuit of excellence. The feedback from my clients serves as a true testament to my commitment and the age-old wisdom that actions speak louder than words.
+            </p>
+
+            <div className="flex items-center gap-6 mt-10">
+              <button 
+                onClick={prevTestimonial}
+                className="text-muted-foreground/70 hover:text-foreground transition-colors p-2"
+                aria-label="Previous testimonial"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button 
+                onClick={nextTestimonial}
+                className="text-muted-foreground/70 hover:text-foreground transition-colors p-2"
+                aria-label="Next testimonial"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </motion.div>
 
         {/* Testimonials */}
-        <div className="max-w-5xl relative min-h-[360px]">
+        <div className="max-w-5xl relative min-h-[320px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              className="bg-transparent border border-border/60 rounded-lg p-8 md:p-12 w-full text-left"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-transparent p-0 w-full text-left"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Rating */}
-              <div className="flex items-center gap-3 mb-6 text-muted-foreground">
+              <div className="flex items-center gap-3 mb-6 text-muted-foreground/50">
                 <span className="text-small">5</span>
                 <span className="text-small">4</span>
                 <span className="text-small">3</span>
@@ -121,13 +119,13 @@ const Feedback = () => {
               </div>
 
               {/* Content */}
-              <blockquote className="text-subheading text-foreground font-light leading-relaxed mb-8 max-w-3xl">
+              <blockquote className="text-subheading text-foreground font-light leading-relaxed mb-10 max-w-3xl">
                 "{testimonials[currentIndex].content}"
               </blockquote>
 
               {/* Author */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center overflow-hidden">
+                <div className="w-12 h-12 bg-muted/40 rounded-full flex items-center justify-center overflow-hidden">
                   <span className="text-sm font-medium text-foreground">
                     {testimonials[currentIndex].name.split(' ').map(n => n[0]).join('')}
                   </span>
@@ -139,6 +137,10 @@ const Feedback = () => {
               </div>
             </motion.div>
           </AnimatePresence>
+        </div>
+
+        <div className="flex items-center justify-start mt-10 text-small text-muted-foreground/50 tracking-[0.2em] uppercase">
+          {currentIndex + 1} / {testimonials.length}
         </div>
 
       </div>

@@ -25,7 +25,7 @@ const Fourmeta = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
@@ -55,7 +55,7 @@ const Fourmeta = () => {
               href="https://github.com/Debisa07"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block text-heading font-grotesk font-medium text-foreground border-b border-foreground/60 pb-1 hover:border-foreground transition-colors duration-500"
+              className="inline-block text-subheading font-grotesk font-normal text-foreground/90 border-b border-foreground/50 pb-1 hover:border-foreground transition-colors duration-500"
               variants={itemVariants}
             >
               GitHub.com/Debisa07
@@ -87,17 +87,23 @@ const Fourmeta = () => {
 
             {/* Image placeholder with play button */}
             <motion.div
-              className="aspect-[4/5] bg-muted/20 overflow-hidden relative group cursor-pointer"
+              className="aspect-[4/5] bg-muted/20 overflow-hidden relative group cursor-pointer image-reveal"
               variants={itemVariants}
-              whileHover={{ scale: 1.01 }}
+              whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+              <img
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80"
+                alt="Portrait"
+                className="absolute inset-0 w-full h-full object-cover grayscale"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
               {/* Play button */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div 
-                  className="w-20 h-20 rounded-full border border-foreground/20 flex items-center justify-center bg-background/20 backdrop-blur-sm"
-                  whileHover={{ scale: 1.1, borderColor: "rgba(255,255,255,0.4)" }}
+                  className="w-20 h-20 rounded-full border border-foreground/25 flex items-center justify-center bg-background/20 backdrop-blur-sm"
+                  whileHover={{ scale: 1.08, borderColor: "rgba(255,255,255,0.4)" }}
                   transition={{ duration: 0.4 }}
                 >
                   <div className="w-0 h-0 border-l-[14px] border-l-foreground/80 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent ml-1" />

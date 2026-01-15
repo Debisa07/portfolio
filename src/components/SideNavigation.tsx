@@ -9,7 +9,9 @@ interface Section {
 const sections: Section[] = [
   { id: "hero", label: "Home" },
   { id: "about", label: "About" },
-  { id: "work", label: "Work" },
+  { id: "clients", label: "Clients" },
+  { id: "work", label: "Fourmeta" },
+  { id: "feedback", label: "Feedback" },
   { id: "contact", label: "Contacts" },
 ];
 
@@ -20,7 +22,7 @@ const SideNavigation = () => {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     // Show after initial scroll
-    setIsVisible(latest > 100);
+    setIsVisible(latest >= 0);
   });
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const SideNavigation = () => {
 
   return (
     <motion.div
-      className="fixed left-6 md:left-12 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-3"
+      className="fixed left-6 md:left-12 bottom-10 z-40 hidden lg:flex flex-col gap-3"
       initial={{ opacity: 0, x: -20 }}
       animate={{ 
         opacity: isVisible ? 1 : 0, 
@@ -67,7 +69,7 @@ const SideNavigation = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
       >
-        <span className="text-lg font-grotesk font-medium text-foreground">
+        <span className="text-lg font-grotesk font-medium text-foreground/90">
           {currentSection + 1}
         </span>
         <span className="text-sm text-muted-foreground/40">
@@ -81,10 +83,10 @@ const SideNavigation = () => {
           <motion.button
             key={section.id}
             onClick={() => scrollToSection(section.id)}
-            className={`text-left text-small font-inter transition-all duration-500 ${
+            className={`text-left text-small font-inter uppercase tracking-[0.12em] transition-all duration-500 ${
               index === currentSection
-                ? "text-foreground"
-                : "text-muted-foreground/40 hover:text-muted-foreground/70"
+                ? "text-foreground/90"
+                : "text-muted-foreground/35 hover:text-muted-foreground/70"
             }`}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -93,7 +95,7 @@ const SideNavigation = () => {
               duration: 0.6,
               ease: [0.25, 0.46, 0.45, 0.94] 
             }}
-            whileHover={{ x: 4 }}
+            whileHover={{ x: 6, y: -2, opacity: 0.9 }}
           >
             {section.label}
           </motion.button>

@@ -39,17 +39,17 @@
 
     /* Custom tokens */
     --nav-height: 5rem;
-    --section-padding: clamp(5rem, 10vw, 10rem);
-    --section-padding-lg: clamp(8rem, 16vw, 18rem);
+    --section-padding: clamp(6rem, 12vw, 12rem);
+    --section-padding-lg: clamp(9rem, 18vw, 20rem);
     --container-max: 1440px;
     
     /* Typography scale - refined for editorial feel */
-    --text-hero: clamp(3rem, 11vw, 10rem);
-    --text-display: clamp(2rem, 6vw, 5rem);
-    --text-heading: clamp(1.25rem, 3vw, 2.5rem);
-    --text-subheading: clamp(1.125rem, 2vw, 1.5rem);
-    --text-body: clamp(0.875rem, 1.2vw, 1rem);
-    --text-small: clamp(0.7rem, 0.9vw, 0.8rem);
+    --text-hero: clamp(3.2rem, 12vw, 12rem);
+    --text-display: clamp(2.4rem, 7vw, 6rem);
+    --text-heading: clamp(1.4rem, 3.6vw, 3.2rem);
+    --text-subheading: clamp(1.125rem, 2.2vw, 1.75rem);
+    --text-body: clamp(0.9rem, 1.25vw, 1.05rem);
+    --text-small: clamp(0.7rem, 0.95vw, 0.85rem);
 
     /* Animation timing - cinematic curves */
     --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
@@ -80,8 +80,8 @@
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    letter-spacing: 0.005em;
-    line-height: 1.65;
+    letter-spacing: 0.01em;
+    line-height: 1.75;
   }
 
   section {
@@ -90,17 +90,17 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.035em;
     line-height: 0.95;
   }
 
   h1 {
-    line-height: 0.88;
+    line-height: 0.86;
   }
 
   h2 {
-    line-height: 0.92;
+    line-height: 0.9;
   }
 
   ::selection {
@@ -147,6 +147,7 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     font-size: var(--text-small);
+    transition: transform var(--duration-fast) var(--ease-smooth), opacity var(--duration-fast) var(--ease-smooth);
   }
 
   .nav-link::after {
@@ -160,6 +161,11 @@
   .nav-link:hover::after {
     transform: scaleX(1);
     transform-origin: left;
+  }
+
+  .nav-link:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
   }
 
   /* Project card hover effects */
@@ -183,11 +189,11 @@
   }
 
   .image-reveal img {
-    transition: transform var(--duration-slow) var(--ease-out-expo);
+    transition: transform var(--duration-slow) var(--ease-out-expo), opacity var(--duration-medium) var(--ease-smooth);
   }
 
   .image-reveal:hover img {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 
   /* Label styling */
@@ -198,6 +204,10 @@
     text-transform: uppercase;
     font-size: var(--text-small);
     @apply text-muted-foreground;
+  }
+
+  .section-divider {
+    @apply w-full h-px bg-foreground/10;
   }
 }
 

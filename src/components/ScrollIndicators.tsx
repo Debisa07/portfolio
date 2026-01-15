@@ -31,16 +31,17 @@ const ScrollIndicators = () => {
             ease: [0.4, 0, 0.2, 1],
           }}
         >
-          <span className="text-small text-muted-foreground/50 tracking-widest">
+          <span className="text-small text-muted-foreground/50 tracking-[0.2em] uppercase">
             Scroll
           </span>
+          <span className="w-px h-10 bg-foreground/20" />
         </motion.div>
       </motion.div>
 
       {/* Back to top - bottom right */}
       <motion.button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-6 md:right-12 z-40 text-small text-muted-foreground/50 hover:text-foreground transition-colors duration-500 tracking-widest"
+        className="fixed bottom-8 right-6 md:right-12 z-40 text-small text-muted-foreground/50 hover:text-foreground transition-colors duration-500 tracking-[0.2em] uppercase"
         initial={{ opacity: 0 }}
         animate={{ opacity: showBackToTop ? 1 : 0 }}
         transition={{ duration: 0.5 }}

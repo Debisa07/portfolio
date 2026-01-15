@@ -25,7 +25,7 @@ const About = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
@@ -47,12 +47,12 @@ const About = () => {
         >
           {/* Left Column - Text content */}
           <motion.div 
-            className="lg:col-span-6 lg:col-start-1"
+            className="lg:col-span-5 lg:col-start-7"
             style={{ y: contentY }}
           >
             {/* Body text - like reference screenshot 2 */}
             <motion.p
-              className="text-body text-muted-foreground/80 leading-[1.8] max-w-lg"
+              className="text-body text-muted-foreground/80 leading-[1.85] max-w-md"
               variants={itemVariants}
             >
               I bring a dynamic approach to every project, delivering comprehensive solutions that drive undeniable success. With a track record of launching impactful products and leading transformative initiatives, I've worked with clients across diverse sectors, consistently exceeding expectations.
@@ -61,22 +61,28 @@ const About = () => {
 
           {/* Right Column - Video/Image placeholder + caption */}
           <motion.div 
-            className="lg:col-span-5 lg:col-start-8"
+            className="lg:col-span-5 lg:col-start-7"
             style={{ y: imageY }}
           >
             {/* Video/Image placeholder */}
             <motion.div
-              className="aspect-video bg-muted/20 overflow-hidden relative group cursor-pointer"
+              className="aspect-[4/3] bg-muted/20 overflow-hidden relative group cursor-pointer image-reveal"
               variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-muted/30 via-muted/10 to-transparent" />
+              <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
+                alt="Studio"
+                className="absolute inset-0 w-full h-full object-cover grayscale"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-background/10 via-transparent to-background/40" />
               {/* Play button indicator */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div 
-                  className="w-16 h-16 rounded-full border border-foreground/20 flex items-center justify-center"
-                  whileHover={{ scale: 1.1, borderColor: "rgba(255,255,255,0.4)" }}
+                  className="w-16 h-16 rounded-full border border-foreground/25 flex items-center justify-center bg-background/20 backdrop-blur-sm"
+                  whileHover={{ scale: 1.08, borderColor: "rgba(255,255,255,0.4)" }}
                   transition={{ duration: 0.4 }}
                 >
                   <div className="w-0 h-0 border-l-[12px] border-l-foreground/60 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1" />

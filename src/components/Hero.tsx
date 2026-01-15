@@ -46,10 +46,10 @@ const Hero = () => {
       className="relative min-h-[100svh] overflow-hidden"
     >
       <motion.div 
-        className="container-custom h-full min-h-[100svh] flex flex-col justify-center pt-24 pb-32"
+        className="container-custom h-full min-h-[100svh] flex flex-col justify-center pt-28 pb-32"
         style={{ opacity }}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0 items-center">
           
           {/* Left side - Name with italic styling like reference */}
           <motion.div 
@@ -63,8 +63,8 @@ const Hero = () => {
               {nameWords.map((word, index) => (
                 <motion.h2
                   key={word}
-                  className="text-display font-grotesk font-light italic text-foreground leading-[1.1]"
-                  initial={{ opacity: 0, y: 60 }}
+                  className="text-display font-grotesk font-light italic text-foreground/90 leading-[1.05]"
+                  initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 1.2,
@@ -80,7 +80,7 @@ const Hero = () => {
 
           {/* Center - Portrait image */}
           <motion.div 
-            className="lg:col-span-5 lg:col-start-4 order-1 lg:order-2 relative"
+            className="lg:col-span-6 lg:col-start-4 order-1 lg:order-2 relative"
             style={{ y: imageY }}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -90,18 +90,15 @@ const Hero = () => {
               ease: [0.25, 0.46, 0.45, 0.94] as const 
             }}
           >
-            <div className="aspect-[3/4] bg-muted/30 overflow-hidden">
-              {/* Placeholder for portrait - using gradient */}
-              <motion.div 
-                className="w-full h-full bg-gradient-to-br from-muted/50 via-muted/30 to-background relative"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                {/* Abstract portrait representation */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-3/4 h-3/4 rounded-full bg-gradient-to-b from-muted/40 to-transparent" />
-                </div>
-              </motion.div>
+            <div className="aspect-[4/3] md:aspect-[3/4] bg-muted/30 overflow-hidden image-reveal">
+              <motion.img
+                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80"
+                alt="Portrait"
+                className="w-full h-full object-cover grayscale"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+              />
             </div>
           </motion.div>
 
@@ -111,19 +108,19 @@ const Hero = () => {
 
         {/* Bottom section - Large headline */}
         <motion.div 
-          className="mt-12 lg:mt-20"
+          className="mt-14 lg:mt-20"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="text-hero font-grotesk font-medium text-foreground leading-[0.9] tracking-[-0.02em]"
+            className="text-hero font-grotesk font-normal text-foreground leading-[0.88] tracking-[-0.03em]"
             variants={itemVariants}
           >
             <span className="block overflow-hidden">
               <motion.span
                 className="inline-block"
-                initial={{ y: 100, opacity: 0 }}
+                initial={{ y: 40, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{
                   duration: 1.3,
@@ -138,7 +135,7 @@ const Hero = () => {
 
           {/* Subtitle */}
           <motion.p
-            className="mt-6 text-body text-muted-foreground/60 max-w-lg"
+            className="mt-6 text-body text-muted-foreground/60 max-w-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
