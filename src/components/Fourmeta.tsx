@@ -3,23 +3,23 @@ import { useRef } from "react";
 
 const Fourmeta = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-150px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
 
-  // Subtle parallax
-  const headingY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const headingY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.15,
+        staggerChildren: 0.12,
+        delayChildren: 0.2,
       },
     },
   };
@@ -30,82 +30,96 @@ const Fourmeta = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.9,
+        duration: 1,
         ease: [0.25, 0.46, 0.45, 0.94] as const,
       },
     },
   };
 
   return (
-    <section id="work" ref={sectionRef} className="section-padding overflow-hidden">
-      <div className="container-custom border-t border-border/60 pt-16">
+    <section id="work" ref={sectionRef} className="section-padding-lg overflow-hidden">
+      <div className="container-custom">
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-start"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {/* Left Column - Label & Heading */}
-          <motion.div style={{ y: headingY }}>
-            <motion.span
-              className="label-text mb-8 block"
+          {/* Left Column - Title & Logo */}
+          <motion.div 
+            className="lg:col-span-5"
+            style={{ y: headingY }}
+          >
+            {/* Title with underline like reference */}
+            <motion.a
+              href="https://github.com/Debisa07"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-heading font-grotesk font-medium text-foreground border-b border-foreground/60 pb-1 hover:border-foreground transition-colors duration-500"
               variants={itemVariants}
             >
-              Selected work
-            </motion.span>
+              GitHub.com/Debisa07
+            </motion.a>
 
-            <motion.h2
-              className="text-display font-grotesk font-medium text-foreground max-w-xl leading-[0.92]"
+            {/* Logo/Icon placeholder */}
+            <motion.div 
+              className="mt-8 text-muted-foreground/40"
               variants={itemVariants}
             >
-              A selection of projects showcasing backend systems and mobile apps.
-            </motion.h2>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </motion.div>
           </motion.div>
 
-          {/* Right Column - Description */}
-          <div className="flex flex-col justify-end">
+          {/* Right Column - Quote & Image */}
+          <motion.div 
+            className="lg:col-span-6 lg:col-start-7"
+            style={{ y: imageY }}
+          >
+            {/* Quote text like reference */}
             <motion.p
-              className="text-subheading text-muted-foreground font-light leading-[1.65] mb-10 max-w-2xl"
+              className="text-subheading text-muted-foreground/80 font-light leading-[1.5] mb-12"
               variants={itemVariants}
             >
-              Highlights include cross-platform Flutter work, backend APIs, and cloud deployments. See more on my GitHub and LinkedIn.
+              When you choose to work with me. You gain my personal commitment to translating your vision into a reality.
             </motion.p>
 
-            <motion.p
-              className="text-body text-muted-foreground/60 leading-relaxed mb-12 max-w-xl"
-              variants={itemVariants}
-            >
-              Whether your project is small and focused or demands a full team effort, we are ready to meet the challenge head-on.
-            </motion.p>
-
+            {/* Image placeholder with play button */}
             <motion.div
-              className="flex items-center gap-4 mb-12"
+              className="aspect-[4/5] bg-muted/20 overflow-hidden relative group cursor-pointer"
               variants={itemVariants}
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <span className="text-small text-muted-foreground/60">GitHub: </span>
-              <motion.a
-                href="https://github.com/Debisa07"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-small text-foreground/80 hover:text-foreground transition-colors duration-500 relative group"
-                whileHover={{ x: 4 }}
-              >
-                github.com/Debisa07
-                <span className="absolute bottom-0 left-0 w-full h-px bg-foreground/30 group-hover:bg-foreground transition-colors duration-500" />
-              </motion.a>
+              <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+              {/* Play button */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div 
+                  className="w-20 h-20 rounded-full border border-foreground/20 flex items-center justify-center bg-background/20 backdrop-blur-sm"
+                  whileHover={{ scale: 1.1, borderColor: "rgba(255,255,255,0.4)" }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <div className="w-0 h-0 border-l-[14px] border-l-foreground/80 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent ml-1" />
+                </motion.div>
+              </div>
             </motion.div>
+          </motion.div>
+        </motion.div>
 
-            {/* CTA Button */}
-            <motion.a
-              href="/Debisa_Abebe_Tulu_Resume.pdf"
-              className="inline-flex items-center gap-3 text-small uppercase tracking-widest text-foreground border border-foreground/20 px-7 py-4 hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-500 w-fit"
-              variants={itemVariants}
-              whileHover={{ scale: 1.02, x: 5 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              View resume
-            </motion.a>
-          </div>
+        {/* Bottom description */}
+        <motion.div 
+          className="mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          <motion.p
+            className="lg:col-span-6 lg:col-start-4 text-body text-muted-foreground/60 leading-[1.8]"
+            variants={itemVariants}
+          >
+            Founder of innovative solutions: I lead an incredible approach that leverages the collective expertise of experienced developers, engineers, and architects. Together, we bring your vision to life and drive unprecedented success.
+          </motion.p>
         </motion.div>
       </div>
     </section>
