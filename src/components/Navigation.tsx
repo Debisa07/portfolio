@@ -1,24 +1,34 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useState } from "react";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const { scrollY } = useScroll();
-  
-  const navOpacity = useTransform(scrollY, [0, 100], [1, 0.95]);
-  const navBackground = useTransform(
-    scrollY,
-    [0, 100],
-    ["hsla(0, 0%, 4%, 0)", "hsla(0, 0%, 4%, 0.9)"]
-  );
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Smooth scroll-based opacity and blur
+  const navBlur = useTransform(scrollY, [0, 100], [0, 8]);
+  const navBorderOpacity = useTransform(scrollY, [0, 100], [0, 0.15]);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const direction = latest > lastScrollY ? "down" : "up";
+    
+    if (latest > 100) {
+      setIsScrolled(true);
+      // Hide on scroll down, show on scroll up
+      if (direction === "down" && latest > 300) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+    } else {
+      setIsScrolled(false);
+      setIsVisible(true);
+    }
+    
+    setLastScrollY(latest);
+  });
 
   const navItems = [
     { label: "Home", href: "#hero" },
@@ -36,33 +46,59 @@ const Navigation = () => {
 
   return (
     <motion.nav
-      style={{ backgroundColor: navBackground, opacity: navOpacity }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "backdrop-blur-md border-b border-border/60" : ""
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ 
+        opacity: isVisible ? 1 : 0, 
+        y: isVisible ? 0 : -20 
+      }}
+      transition={{ 
+        duration: 0.5, 
+        ease: [0.25, 0.46, 0.45, 0.94] 
+      }}
+      style={{
+        backdropFilter: isScrolled ? `blur(${navBlur.get()}px)` : "none",
+      }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out-expo ${
+        isScrolled 
+          ? "bg-background/80" 
+          : "bg-transparent"
       }`}
     >
+      <motion.div 
+        className="absolute inset-x-0 bottom-0 h-px bg-border"
+        style={{ opacity: navBorderOpacity }}
+      />
+      
       <div className="container-custom flex items-center justify-between h-20">
         {/* Logo */}
         <motion.a
           href="#"
-          className="font-grotesk text-lg font-medium tracking-[0.08em] text-foreground uppercase"
+          className="font-grotesk text-lg font-medium tracking-[0.08em] text-foreground uppercase relative group"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          Debisa Abebe
+          <span className="relative inline-block">
+            Debisa Abebe
+            <motion.span 
+              className="absolute bottom-0 left-0 w-full h-px bg-foreground origin-left"
+              initial={{ scaleX: 0 }}
+              whileHover={{ scaleX: 1 }}
+              transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+            />
+          </span>
         </motion.a>
 
         {/* Nav Links */}
         <motion.ul
-          className="hidden md:flex items-center gap-7"
+          className="hidden md:flex items-center gap-8"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {navItems.map((item, index) => (
             <motion.li
@@ -70,23 +106,21 @@ const Navigation = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.6,
-                delay: 0.1 + index * 0.05,
-                ease: [0.16, 1, 0.3, 1],
+                duration: 0.8,
+                delay: 0.2 + index * 0.08,
+                ease: [0.25, 0.46, 0.45, 0.94],
               }}
             >
-              <button
+              <motion.button
                 onClick={() => scrollToSection(item.href)}
-                className="nav-link text-foreground/70 hover:text-foreground transition-colors duration-300"
+                className="nav-link text-muted-foreground/70 hover:text-foreground transition-all duration-400 relative py-2"
+                whileHover={{ y: -3 }}
+                transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
-                <motion.span
-                  className="inline-block"
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.2 }}
-                >
+                <span className="relative inline-block">
                   {item.label}
-                </motion.span>
-              </button>
+                </span>
+              </motion.button>
             </motion.li>
           ))}
         </motion.ul>
@@ -94,10 +128,12 @@ const Navigation = () => {
         {/* CTA */}
         <motion.button
           onClick={() => scrollToSection("#contact")}
-          className="hidden md:inline-flex items-center gap-2 text-small uppercase tracking-[0.3em] text-foreground border border-foreground/30 px-5 py-2.5 hover:border-foreground transition-colors"
+          className="hidden md:inline-flex items-center gap-2 text-small uppercase tracking-[0.3em] text-foreground border border-foreground/20 px-6 py-3 hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-500"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           Let's talk
         </motion.button>
