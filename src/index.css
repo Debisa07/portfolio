@@ -39,23 +39,26 @@
 
     /* Custom tokens */
     --nav-height: 5rem;
-    --section-padding: clamp(4.5rem, 10vw, 9rem);
+    --section-padding: clamp(6rem, 12vw, 12rem);
+    --section-padding-lg: clamp(8rem, 15vw, 16rem);
     --container-max: 1560px;
     
-    /* Typography scale */
-    --text-hero: clamp(3.5rem, 12vw, 11rem);
-    --text-display: clamp(2.5rem, 8vw, 6rem);
-    --text-heading: clamp(1.5rem, 4vw, 3rem);
-    --text-subheading: clamp(1.25rem, 2vw, 1.75rem);
-    --text-body: clamp(0.875rem, 1.5vw, 1rem);
+    /* Typography scale - refined for editorial feel */
+    --text-hero: clamp(3.5rem, 13vw, 12rem);
+    --text-display: clamp(2.5rem, 8vw, 6.5rem);
+    --text-heading: clamp(1.5rem, 4vw, 3.5rem);
+    --text-subheading: clamp(1.25rem, 2.5vw, 1.875rem);
+    --text-body: clamp(0.9rem, 1.5vw, 1.0625rem);
     --text-small: clamp(0.75rem, 1vw, 0.875rem);
 
-    /* Animation timing */
+    /* Animation timing - cinematic curves */
     --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-    --duration-fast: 0.3s;
-    --duration-medium: 0.6s;
-    --duration-slow: 1s;
+    --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --duration-fast: 0.35s;
+    --duration-medium: 0.7s;
+    --duration-slow: 1.2s;
   }
 
   .dark {
@@ -88,8 +91,16 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 500;
-    letter-spacing: -0.04em;
-    line-height: 0.9;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+  }
+
+  h1 {
+    line-height: 0.88;
+  }
+
+  h2 {
+    line-height: 0.92;
   }
 
   ::selection {
@@ -194,5 +205,25 @@
   .section-padding {
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);
+  }
+
+  .section-padding-lg {
+    padding-top: var(--section-padding-lg);
+    padding-bottom: var(--section-padding-lg);
+  }
+
+  /* Smooth transitions for all interactive elements */
+  .transition-editorial {
+    transition: all var(--duration-medium) var(--ease-editorial);
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

@@ -1,108 +1,155 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-150px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
 
-  const getVariants = (delay: number) => ({
-    hidden: { opacity: 0, y: 40 },
+  // Subtle parallax for editorial feel
+  const contentY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        delay,
-        ease: [0.16, 1, 0.3, 1] as const,
+        duration: 0.9,
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
       },
     },
-  });
+  };
+
+  const listItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.7,
+        delay: 0.4 + i * 0.08,
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
+      },
+    }),
+  };
+
+  const services = [
+    "Backend Development (APIs, services)",
+    "Cross-platform Mobile (Flutter)",
+    "Cloud deployments & DevOps",
+    "Python / Node.js / Javascript",
+  ];
 
   return (
-    <section id="about" ref={sectionRef} className="section-padding">
-      <div className="container-custom border-t border-border pt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+    <section id="about" ref={sectionRef} className="section-padding overflow-hidden">
+      <div className="container-custom border-t border-border/60 pt-16">
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {/* Left Column - Label & Heading */}
-          <div>
+          <motion.div style={{ y: contentY }}>
             <motion.span
-              className="label-text mb-6 block"
-              variants={getVariants(0)}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              className="label-text mb-8 block"
+              variants={itemVariants}
             >
               About me
             </motion.span>
             
             <motion.h2
-              className="text-display font-grotesk font-medium text-foreground max-w-xl"
-              variants={getVariants(0.1)}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              className="text-display font-grotesk font-medium text-foreground max-w-xl leading-[0.92]"
+              variants={itemVariants}
             >
               Software engineer specializing in backend systems and cross-platform mobile applications.
             </motion.h2>
-          </div>
+          </motion.div>
 
           {/* Right Column - Description */}
           <div className="flex flex-col justify-end">
             <motion.p
-              className="text-subheading text-muted-foreground font-light leading-relaxed mb-10 max-w-2xl"
-              variants={getVariants(0.2)}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              className="text-subheading text-muted-foreground font-light leading-[1.65] mb-12 max-w-2xl"
+              variants={itemVariants}
             >
               I build backend services and cross-platform mobile apps. Recent work includes engineering a cross-platform Flutter application (2024) and contributing as a backend developer at Pazion Ethiopia in Addis Ababa.
             </motion.p>
 
             <motion.p
-              className="label-text leading-relaxed mb-6"
-              variants={getVariants(0.3)}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              className="label-text leading-relaxed mb-8"
+              variants={itemVariants}
             >
               How I can help you
             </motion.p>
 
             <motion.ul
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-body text-muted-foreground/80 mb-12 max-w-2xl"
-              variants={getVariants(0.35)}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-body text-muted-foreground/80 mb-14 max-w-2xl"
+              variants={containerVariants}
             >
-              <li className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-foreground/70" />
-                Backend Development (APIs, services)
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-foreground/70" />
-                Cross-platform Mobile (Flutter)
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-foreground/70" />
-                Cloud deployments & DevOps
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-foreground/70" />
-                Python / Node.js / Javascript
-              </li>
+              {services.map((service, i) => (
+                <motion.li 
+                  key={service}
+                  className="flex items-center gap-4 group"
+                  custom={i}
+                  variants={listItemVariants}
+                >
+                  <motion.span 
+                    className="w-1.5 h-1.5 rounded-full bg-foreground/50 group-hover:bg-foreground transition-colors duration-500"
+                    whileHover={{ scale: 1.5 }}
+                  />
+                  <span className="group-hover:text-foreground transition-colors duration-500">
+                    {service}
+                  </span>
+                </motion.li>
+              ))}
             </motion.ul>
 
             {/* Stats */}
             <motion.div
-              className="pt-8 border-t border-border"
-              variants={getVariants(0.4)}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
+              className="pt-10 border-t border-border/60"
+              variants={itemVariants}
             >
-              <span className="label-text mb-6 block">Selected highlights</span>
-              <div className="flex flex-col gap-4 max-w-2xl">
-                <div className="text-body text-muted-foreground/80">• Engineered a cross-platform Flutter application (2024)</div>
-                <div className="text-body text-muted-foreground/80">• Backend developer at Pazion Ethiopia, Addis Ababa</div>
-                <div className="text-body text-muted-foreground/80">• Active open-source contributions: https://github.com/Debisa07</div>
+              <span className="label-text mb-8 block">Selected highlights</span>
+              <div className="flex flex-col gap-5 max-w-2xl">
+                {[
+                  "Engineered a cross-platform Flutter application (2024)",
+                  "Backend developer at Pazion Ethiopia, Addis Ababa",
+                  "Active open-source contributions: https://github.com/Debisa07",
+                ].map((highlight, i) => (
+                  <motion.div 
+                    key={i}
+                    className="text-body text-muted-foreground/70 hover:text-muted-foreground transition-colors duration-500"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ 
+                      duration: 0.7, 
+                      delay: 0.6 + i * 0.1,
+                      ease: [0.25, 0.46, 0.45, 0.94] as const
+                    }}
+                  >
+                    • {highlight}
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
