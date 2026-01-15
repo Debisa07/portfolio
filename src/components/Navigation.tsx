@@ -23,10 +23,8 @@ const Navigation = () => {
   const navItems = [
     { label: "Home", href: "#hero" },
     { label: "About", href: "#about" },
-    { label: "Clients", href: "#clients" },
-    { label: "Fourmeta", href: "#fourmeta" },
-    { label: "Feedback", href: "#feedback" },
-    { label: "Contacts", href: "#contact" },
+    { label: "Work", href: "#work" },
+    { label: "Contact", href: "#contact" },
   ];
 
   const scrollToSection = (href: string) => {
@@ -56,7 +54,7 @@ const Navigation = () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          AlexRodukov
+          Debisa Abebe
         </motion.a>
 
         {/* Nav Links */}

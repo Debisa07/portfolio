@@ -25,7 +25,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            Hi, I’m Alex Rodukov
+            Hi, I’m Debisa Abebe Tulu
           </motion.span>
 
           {/* Main Headline */}
@@ -45,7 +45,7 @@ const Hero = () => {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              Digital
+              Software
             </motion.span>
             <motion.span
               className="block"
@@ -57,7 +57,7 @@ const Hero = () => {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              Strategist
+              Engineer
             </motion.span>
           </motion.h1>
 
@@ -72,7 +72,7 @@ const Hero = () => {
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-            multi-disciplinary strategic consult working at the intersection between Business, Design & Digital.
+            Software engineer focused on backend systems and cross-platform mobile apps. I build reliable services and delightful user experiences.
           </motion.p>
 
           <motion.button
@@ -82,7 +82,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Let’s talk
+            Contact me
           </motion.button>
           </div>
         </div>

@@ -39,7 +39,7 @@ const About = () => {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              Senior consultant with expertise in tech, marketing, design, and AI.
+              Software engineer specializing in backend systems and cross-platform mobile applications.
             </motion.h2>
           </div>
 
@@ -51,10 +51,7 @@ const About = () => {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              I bring a dynamic approach to every project, delivering comprehensive solutions
-that drive undeniable success. With a track record of launching impactful
-products and leading transformative initiatives, I've worked with clients across
-diverse sectors, consistently exceeding expectations.
+              I build backend services and cross-platform mobile apps. Recent work includes engineering a cross-platform Flutter application (2024) and contributing as a backend developer at Pazion Ethiopia in Addis Ababa.
             </motion.p>
 
             <motion.p
@@ -74,19 +71,19 @@ diverse sectors, consistently exceeding expectations.
             >
               <li className="flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-foreground/70" />
-                Strategy & positioning
+                Backend Development (APIs, services)
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-foreground/70" />
-                Brand & identity systems
+                Cross-platform Mobile (Flutter)
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-foreground/70" />
-                Digital product experiences
+                Cloud deployments & DevOps
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-foreground/70" />
-                AI-driven growth initiatives
+                Python / Node.js / Javascript
               </li>
             </motion.ul>
 
@@ -97,30 +94,12 @@ diverse sectors, consistently exceeding expectations.
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              <span className="label-text mb-6 block">Proved myself with</span>
-              <div className="grid grid-cols-3 gap-8">
-              <div>
-                <span className="text-display font-grotesk font-medium text-foreground block mb-2">
-                  15+
-                </span>
-                <span className="label-text">Years of experience</span>
+              <span className="label-text mb-6 block">Selected highlights</span>
+              <div className="flex flex-col gap-4 max-w-2xl">
+                <div className="text-body text-muted-foreground/80">• Engineered a cross-platform Flutter application (2024)</div>
+                <div className="text-body text-muted-foreground/80">• Backend developer at Pazion Ethiopia, Addis Ababa</div>
+                <div className="text-body text-muted-foreground/80">• Active open-source contributions: https://github.com/Debisa07</div>
               </div>
-              <div>
-                <span className="text-display font-grotesk font-medium text-foreground block mb-2">
-                  142+
-                </span>
-                <span className="label-text">Clients</span>
-              </div>
-              <div>
-                <span className="text-display font-grotesk font-medium text-foreground block mb-2">
-                  56+
-                </span>
-                <span className="label-text">Projects</span>
-              </div>
-              </div>
-              <p className="text-small text-muted-foreground/80 mt-6">
-                The numbers speak for themselves....
-              </p>
             </motion.div>
           </div>
         </div>

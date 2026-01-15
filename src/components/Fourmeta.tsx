@@ -19,7 +19,7 @@ const Fourmeta = () => {
   });
 
   return (
-    <section id="fourmeta" ref={sectionRef} className="section-padding">
+    <section id="work" ref={sectionRef} className="section-padding">
       <div className="container-custom border-t border-border pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left Column - Label & Heading */}
@@ -30,7 +30,7 @@ const Fourmeta = () => {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              When you choose to work with my team
+              Selected work
             </motion.span>
 
             <motion.h2
@@ -39,7 +39,7 @@ const Fourmeta = () => {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              You gain my personal commitment to translating your vision into a reality.
+              A selection of projects showcasing backend systems and mobile apps.
             </motion.h2>
           </div>
 
@@ -51,10 +51,7 @@ const Fourmeta = () => {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              Founder of Fourmeta: I lead an incredible team that leverages the collective
-expertise of experienced designers, developers, project managers, and marketing
-specialists. Together, we will bring your vision to life and drive unprecedented
-success.
+              Highlights include cross-platform Flutter work, backend APIs, and cloud deployments. See more on my GitHub and LinkedIn.
             </motion.p>
 
             <motion.p
@@ -73,17 +70,20 @@ ready to meet the challenge head-on.
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              <img
-                src="https://cdn.prod.website-files.com/642ab9cb69d01c2bbd371806/642d36bf75d75ba20d68e20d_fourmeta.svg"
-                alt="Fourmeta"
-                className="h-6"
-              />
-              <span className="text-small text-muted-foreground">Fourmeta.com</span>
+              <span className="text-small text-muted-foreground">GitHub: </span>
+              <a
+                href="https://github.com/Debisa07"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-small text-foreground hover:underline"
+              >
+                github.com/Debisa07
+              </a>
             </motion.div>
 
             {/* CTA Button */}
             <motion.a
-              href="https://fourmeta.com/"
+              href="/Debisa_Abebe_Tulu_Resume.pdf"
               className="inline-flex items-center gap-3 text-small uppercase tracking-widest text-foreground border border-foreground/30 px-5 py-3 hover:border-foreground transition-colors w-fit"
               variants={getVariants(0.4)}
               initial="hidden"
@@ -91,7 +91,7 @@ ready to meet the challenge head-on.
               whileHover={{ x: 8 }}
               transition={{ duration: 0.3 }}
             >
-              Discover Fourmeta
+              View resume
             </motion.a>
           </div>
         </div>

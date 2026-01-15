@@ -31,18 +31,16 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/alex-rodukov" },
-    { label: "Instagram", href: "https://instagram.com/alexrodukov?igshid=YmM0MjE2YWMzOA==" },
-    { label: "Medium", href: "https://medium.com/@rodukov" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/debisa-abebe-tu/" },
+    { label: "GitHub", href: "https://github.com/Debisa07" },
+    { label: "Email", href: "mailto:se.debisaabebe@gmail.com" },
   ];
 
   const navLinks = [
     { label: "Home", href: "#hero" },
     { label: "About", href: "#about" },
-    { label: "Clients", href: "#clients" },
-    { label: "Fourmeta", href: "#fourmeta" },
-    { label: "Feedback", href: "#feedback" },
-    { label: "Contacts", href: "#contact" },
+    { label: "Work", href: "#work" },
+    { label: "Contact", href: "#contact" },
   ];
 
   const scrollToSection = (href: string) => {
@@ -124,8 +122,8 @@ const Footer = () => {
           variants={itemVariants}
         >
           <p className="text-body text-muted-foreground/70">
-            London-based. Surrounded by Camden's vibrant community of creatives and tech enthusiasts, I'm
-            constantly inspired. Let's meet for a coffee and discuss how we can turn your digital dreams into reality.
+            Addis Ababa-based software engineer focused on backend and mobile development. Available for freelance
+            and full-time opportunities.
           </p>
         </motion.div>
 
@@ -135,34 +133,23 @@ const Footer = () => {
         >
           <div>
             <span className="label-text mb-4 block">Location</span>
-            <a
-              href="https://goo.gl/maps/WoES5wZpqYGhaTa47"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-body text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Unit 212, Second Floor<br />
-              Nile Business Centre<br />
-              56-60 Nelson St, London E1 2DE
-            </a>
+            <div className="text-body text-muted-foreground">Addis Ababa, Ethiopia</div>
           </div>
           <div>
             <span className="label-text mb-4 block">Email</span>
             <a
-              href="mailto:alex@rodukov.com"
+              href="mailto:se.debisaabebe@gmail.com"
               className="text-body text-foreground hover:text-muted-foreground transition-colors"
             >
-              alex@rodukov.com
+              se.debisaabebe@gmail.com
             </a>
           </div>
           <div>
-            <span className="label-text mb-4 block">Phone</span>
-            <a
-              href="tel:+442074823128"
-              className="text-body text-foreground hover:text-muted-foreground transition-colors"
-            >
-              (+44) 207-4823-128
-            </a>
+            <span className="label-text mb-4 block">Links</span>
+            <div className="flex flex-col">
+              <a href="https://github.com/Debisa07" target="_blank" rel="noopener noreferrer" className="text-body text-muted-foreground hover:text-foreground transition-colors">github.com/Debisa07</a>
+              <a href="https://www.linkedin.com/in/debisa-abebe-tu/" target="_blank" rel="noopener noreferrer" className="text-body text-muted-foreground hover:text-foreground transition-colors">linkedin.com/in/debisa-abebe-tu</a>
+            </div>
           </div>
         </motion.div>
 
@@ -188,7 +175,7 @@ const Footer = () => {
           className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border gap-4"
         >
           <p className="text-small text-muted-foreground">
-            © 2024 Alex Rodukov. All rights reserved.
+            © 2026 Debisa Abebe Tulu. All rights reserved.
           </p>
           <div className="flex gap-8">
             <button
