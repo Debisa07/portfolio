@@ -60,14 +60,14 @@
     --duration-medium: 0.8s;
     --duration-slow: 1.4s;
     --color-accent: rgb(255, 223, 0);
-    --font-primary: "PP Supply Mono", monospace;
+    --font-primary: 'Space Grotesk', sans-serif;
   }
 
   .dark {
     --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     --color-accent: rgb(255, 223, 0);
-    --font-primary: "PP Supply Mono", monospace;
+    --font-primary: 'Space Grotesk', sans-serif;
   }
 }
 
@@ -82,8 +82,8 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
     letter-spacing: 0.01em;
     line-height: 1.75;
   }

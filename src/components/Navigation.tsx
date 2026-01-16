@@ -57,6 +57,17 @@ const Navigation = () => {
           Home
         </motion.button>
 
+        <motion.button
+          onClick={() => scrollToSection("#education")}
+          className="hidden md:block text-small font-inter text-foreground/70 hover:text-foreground transition-all duration-400 tracking-[0.12em] uppercase"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+          whileHover={{ y: -3, opacity: 0.95 }}
+        >
+          Education
+        </motion.button>
+
         {/* CTA - Pill shaped like rodukov */}
         <motion.button
           onClick={() => scrollToSection("#contact")}

@@ -2,12 +2,17 @@ import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Education from "@/components/Education";
 import Clients from "@/components/Clients";
+import ProjectsShowcase from "@/components/projects";
+import Summery from "@/components/summery";
+import AiMlSkill from "@/components/aiml";
 import Fourmeta from "@/components/Fourmeta";
-import Feedback from "@/components/Feedback";
+// import Feedback from "@/components/Feedback";
 import Footer from "@/components/Footer";
 import SideNavigation from "@/components/SideNavigation";
 import ScrollIndicators from "@/components/ScrollIndicators";
+import Timeline from "@/components/timeline";
 
 const Index = () => {
   return (
@@ -24,10 +29,15 @@ const Index = () => {
       <SideNavigation />
       <ScrollIndicators />
       <Hero />
+      <Timeline />
+      <ProjectsShowcase />
+      <Summery />
+      <Education />
+      <AiMlSkill />
       <About />
       <Clients />
       <Fourmeta />
-      <Feedback />
+      {/* <Feedback /> */}
       <Footer />
     </motion.main>
   );

@@ -51,7 +51,7 @@ export default {
       },
       fontFamily: {
         grotesk: ['Space Grotesk', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
+        inter: ['Space Grotesk', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

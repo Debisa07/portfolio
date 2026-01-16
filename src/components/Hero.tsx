@@ -1,155 +1,100 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+"use client"
+
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef } from "react"
 
 const Hero = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"]
-  });
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] })
 
-  // Parallax effects
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.5,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1.2,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
-      },
-    },
-  };
-
-  // Name animation - word by word
-  const nameWords = ["Debisa", "Abebe"];
+  // simple parallax for name
+  const nameY = useTransform(scrollYProgress, [0, 1], [0, -80])
+  const nameOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.2])
 
   return (
-    <section 
-      id="hero" 
-      ref={sectionRef}
-      className="relative min-h-[100svh] overflow-hidden"
-    >
-      <motion.div 
-        className="container-custom h-full min-h-[100svh] flex flex-col justify-center pt-28 pb-32"
-        style={{ opacity }}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0 items-center">
-          
-          {/* Left side - Name with italic styling like reference */}
-          <motion.div 
-            className="lg:col-span-4 lg:col-start-1 order-2 lg:order-1"
-            style={{ y: textY }}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <div className="overflow-hidden">
-              {nameWords.map((word, index) => (
-                <motion.h2
-                  key={word}
-                  className="text-display font-grotesk font-light italic text-foreground/90 leading-[1.05]"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 1.2,
-                    delay: 0.4 + index * 0.15,
-                    ease: [0.25, 0.46, 0.45, 0.94] as const,
-                  }}
-                >
-                  {word}
-                </motion.h2>
-              ))}
-            </div>
-          </motion.div>
+    <section id="hero" ref={sectionRef} className="relative min-h-[100svh] overflow-hidden bg-[#1a1a1a] text-white">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[#22c55e]/10 blur-[80px]" />
+        <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-[#22c55e]/8 blur-[90px]" />
+      </div>
+      <div className="container mx-auto h-full min-h-[100svh] flex items-center justify-center relative px-6">
+        {/* Huge background HELLO */}
+        <motion.h1
+          className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none select-none"
+          style={{ opacity: 0.06 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.06 }}
+          transition={{ duration: 1.6, ease: "easeOut" }}
+        >
+          <span className="font-grotesk font-extrabold text-[20rem] leading-[0.85] tracking-[-0.03em] text-white/10">
+            HELLO
+          </span>
+        </motion.h1>
 
-          {/* Center - Portrait image */}
-          <motion.div 
-            className="lg:col-span-6 lg:col-start-4 order-1 lg:order-2 relative"
-            style={{ y: imageY }}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ 
-              duration: 1.4, 
-              delay: 0.2,
-              ease: [0.25, 0.46, 0.45, 0.94] as const 
-            }}
-          >
-            <div className="aspect-[4/3] md:aspect-[3/4] bg-muted/30 overflow-hidden image-reveal">
-              <motion.img
-                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80"
-                alt="Portrait"
-                className="w-full h-full object-cover grayscale"
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+        {/* Decorative circle on the right */}
+        <motion.div
+          className="absolute right-20 top-1/3 w-32 h-32 rounded-full border border-white/10 hidden lg:block"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+        />
+
+        {/* Menu icon top right */}
+        <div className="absolute top-8 right-8 text-white/40 text-xl hidden lg:block">⋮</div>
+
+        {/* Left descriptive text */}
+        <div className="absolute left-0 top-1/3 w-1/4 px-8 hidden lg:block">
+          <p className="text-xs text-white/60 leading-relaxed">
+            I am a creative, dedicated and multidisciplinary creative designer based in London, currently building.
+          </p>
+        </div>
+
+        {/* Right descriptive text */}
+        <div className="absolute right-0 top-1/3 w-1/4 px-8 hidden lg:block text-right">
+          <p className="text-xs text-white/60 leading-relaxed">
+            Solving problems and creating clear visual languages is my passion and key focus of my work.
+          </p>
+          <p className="text-xs text-white/60 leading-relaxed mt-6">
+            I am an advocate for a people-user experience. I understand design and product-focused innovative
+            excellence.
+          </p>
+        </div>
+
+        {/* Center content: signature name + role + note */}
+        <div className="w-full max-w-3xl text-center">
+          <motion.div style={{ y: nameY, opacity: nameOpacity }} className="relative">
+            <div className="absolute inset-0 -z-10 flex items-center justify-center">
+              <div className="h-28 w-[70%] rounded-full bg-[#22c55e]/10 blur-[60px]" />
+            </div>
+            <h2
+              className="text-7xl md:text-8xl lg:text-9xl font-light italic tracking-wide text-white mb-8"
+              style={{ fontFamily: "cursive, Georgia, serif" }}
+            >
+              John Mossah
+            </h2>
+
+            {/* Timeline element at bottom center */}
+            <div className="flex items-center justify-center my-16">
+              <motion.div
+                className="w-[2px] h-12 bg-[#22c55e]/40"
+                initial={{ scaleY: 0.6, opacity: 0.5 }}
+                animate={{ scaleY: 1, opacity: 0.9 }}
+                transition={{ duration: 1.4, ease: "easeOut" }}
               />
             </div>
           </motion.div>
 
-          {/* Right side - empty for balance */}
-          <div className="lg:col-span-3 order-3 hidden lg:block" />
+          {/* bottom small experience note */}
+          <div className="mt-12 flex items-center justify-center">
+            <div className="text-xs text-white/50">
+              — 8 Years of experience
+              <span className="block text-xs text-white/40">2006 - 2017</span>
+            </div>
+          </div>
         </div>
-
-        {/* Bottom section - Large headline */}
-        <motion.div 
-          className="mt-14 lg:mt-20"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.h1
-            className="text-hero font-grotesk font-normal text-foreground leading-[0.88] tracking-[-0.03em]"
-            variants={itemVariants}
-          >
-            <span className="block overflow-hidden">
-              <motion.span
-                className="inline-block"
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                  duration: 1.3,
-                  delay: 0.7,
-                  ease: [0.25, 0.46, 0.45, 0.94] as const,
-                }}
-              >
-                Software Engineer
-              </motion.span>
-            </span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            className="mt-6 text-body text-muted-foreground/60 max-w-xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 1,
-              delay: 1,
-              ease: [0.25, 0.46, 0.45, 0.94] as const,
-            }}
-          >
-            Hi, I'm Debisa Abebe, a multi-disciplinary software engineer focused on backend systems and cross-platform mobile applications.
-          </motion.p>
-        </motion.div>
-      </motion.div>
+      </div>
     </section>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
