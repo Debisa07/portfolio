@@ -1,135 +1,118 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const Fourmeta = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+const Footer = () => {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-
-  const headingY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [30, -30]);
-
-  const containerVariants = {
+  const container = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.12, delayChildren: 0.15 },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+  const item = {
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 1,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
-      },
+      transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] as const },
     },
   };
 
   return (
-    <section id="work" ref={sectionRef} className="section-padding-lg overflow-hidden">
+    <footer
+      ref={ref}
+      className="relative border-t border-foreground/10 section-padding-lg overflow-hidden"
+    >
       <div className="container-custom">
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8"
-          variants={containerVariants}
+        <motion.div
+          variants={container}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12"
         >
-          {/* Left Column - Title & Logo */}
-          <motion.div 
-            className="lg:col-span-5"
-            style={{ y: headingY }}
-          >
-            {/* Title with underline like reference */}
-            <motion.a
-              href="https://github.com/Debisa07"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-subheading font-grotesk font-normal text-foreground/90 border-b border-foreground/50 pb-1 hover:border-foreground transition-colors duration-500"
-              variants={itemVariants}
-            >
-              GitHub.com/Debisa07
-            </motion.a>
-
-            {/* Logo/Icon placeholder */}
-            <motion.div 
-              className="mt-8 text-muted-foreground/40"
-              variants={itemVariants}
-            >
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-            </motion.div>
+          {/* Left — Identity */}
+          <motion.div variants={item} className="lg:col-span-4">
+            <h3 className="text-subheading font-grotesk tracking-tight">
+              Debisa Abebe
+            </h3>
+            <p className="mt-3 text-sm text-muted-foreground/70 leading-relaxed">
+              Full-Stack Software Engineer focused on scalable systems,
+              AI-augmented development, and clean product architecture.
+            </p>
           </motion.div>
 
-          {/* Right Column - Quote & Image */}
-          <motion.div 
-            className="lg:col-span-6 lg:col-start-7"
-            style={{ y: imageY }}
-          >
-            {/* Quote text like reference */}
-            <motion.p
-              className="text-subheading text-muted-foreground/80 font-light leading-[1.5] mb-12"
-              variants={itemVariants}
-            >
-              When you choose to work with me. You gain my personal commitment to translating your vision into a reality.
-            </motion.p>
-
-            {/* Image placeholder with play button */}
-            <motion.div
-              className="aspect-[4/5] bg-muted/20 overflow-hidden relative group cursor-pointer image-reveal"
-              variants={itemVariants}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80"
-                alt="Portrait"
-                className="absolute inset-0 w-full h-full object-cover grayscale"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
-              {/* Play button */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div 
-                  className="w-20 h-20 rounded-full border border-foreground/25 flex items-center justify-center bg-background/20 backdrop-blur-sm"
-                  whileHover={{ scale: 1.08, borderColor: "rgba(255,255,255,0.4)" }}
-                  transition={{ duration: 0.4 }}
+          {/* Center — Contact */}
+          <motion.div variants={item} className="lg:col-span-4">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground/50 mb-4">
+              Contact
+            </p>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a
+                  href="mailto:se.debisaabebe@gmail.com"
+                  className="hover:text-[#22c55e] transition-colors"
                 >
-                  <div className="w-0 h-0 border-l-[14px] border-l-foreground/80 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent ml-1" />
-                </motion.div>
-              </div>
-            </motion.div>
+                  se.debisaabebe@gmail.com
+                </a>
+              </li>
+              <li className="text-muted-foreground/70">
+                Available for full-time & contract roles
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Right — Links */}
+          <motion.div
+            variants={item}
+            className="lg:col-span-4 lg:text-right"
+          >
+            <p className="text-xs uppercase tracking-widest text-muted-foreground/50 mb-4">
+              Online
+            </p>
+            <div className="flex lg:justify-end gap-6 text-sm">
+              <a
+                href="https://github.com/Debisa07"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#22c55e] transition-colors"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#22c55e] transition-colors"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="/Debisa-Abebe-CV.pdf"
+                className="hover:text-[#22c55e] transition-colors"
+              >
+                Download CV
+              </a>
+            </div>
           </motion.div>
         </motion.div>
 
-        {/* Bottom description */}
-        <motion.div 
-          className="mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8"
-          variants={containerVariants}
+        {/* Bottom bar */}
+        <motion.div
+          variants={item}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
+          className="mt-20 pt-6 border-t border-foreground/10 flex flex-col md:flex-row justify-between gap-4 text-xs text-muted-foreground/50"
         >
-          <motion.p
-            className="lg:col-span-6 lg:col-start-4 text-body text-muted-foreground/60 leading-[1.8]"
-            variants={itemVariants}
-          >
-            Founder of innovative solutions: I lead an incredible approach that leverages the collective expertise of experienced developers, engineers, and architects. Together, we bring your vision to life and drive unprecedented success.
-          </motion.p>
+          <span>© {new Date().getFullYear()} Debisa Abebe</span>
+          <span>Built with React, TypeScript & Framer Motion</span>
         </motion.div>
       </div>
-    </section>
+    </footer>
   );
 };
 
-export default Fourmeta;
+export default Footer;

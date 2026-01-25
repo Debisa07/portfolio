@@ -12,7 +12,7 @@ const sections: Section[] = [
   { id: "clients", label: "Clients" },
   { id: "work", label: "Fourmeta" },
   { id: "feedback", label: "Feedback" },
-  { id: "contact", label: "Contacts" },
+ 
 ];
 
 const SideNavigation = () => {

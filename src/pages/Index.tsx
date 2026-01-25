@@ -8,8 +8,7 @@ import ProjectsShowcase from "@/components/projects";
 import Summery from "@/components/summery";
 import AiMlSkill from "@/components/aiml";
 import Fourmeta from "@/components/Fourmeta";
-// import Feedback from "@/components/Feedback";
-import Footer from "@/components/Footer";
+
 import SideNavigation from "@/components/SideNavigation";
 import ScrollIndicators from "@/components/ScrollIndicators";
 import Timeline from "@/components/timeline";
@@ -37,8 +36,8 @@ const Index = () => {
       <About />
       <Clients />
       <Fourmeta />
-      {/* <Feedback /> */}
-      <Footer />
+     
+    
     </motion.main>
   );
 };
