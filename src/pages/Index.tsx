@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
+
 import Education from "@/components/Education";
 import Clients from "@/components/Clients";
 import ProjectsShowcase from "@/components/projects";
 import Summery from "@/components/summery";
-import AiMlSkill from "@/components/aiml";
+
 import Fourmeta from "@/components/Fourmeta";
 
 import SideNavigation from "@/components/SideNavigation";
@@ -29,11 +29,11 @@ const Index = () => {
       <ScrollIndicators />
       <Hero />
       <Timeline />
-      <ProjectsShowcase />
+     
       <Summery />
       <Education />
-      <AiMlSkill />
-      <About />
+      <ProjectsShowcase />
+      
       <Clients />
       <Fourmeta />
      
