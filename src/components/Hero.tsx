@@ -45,18 +45,17 @@ const Hero = () => {
         {/* Left descriptive text */}
         <div className="absolute left-0 top-1/3 w-1/4 px-8 hidden lg:block">
           <p className="text-xs text-white/60 leading-relaxed">
-            I am a creative, dedicated and multidisciplinary creative designer based in London, currently building.
+            Passionate and results-driven Software Engineer based in Ethiopia, specializing in full-stack development and cloud solutions.
           </p>
         </div>
 
         {/* Right descriptive text */}
         <div className="absolute right-0 top-1/3 w-1/4 px-8 hidden lg:block text-right">
           <p className="text-xs text-white/60 leading-relaxed">
-            Solving problems and creating clear visual languages is my passion and key focus of my work.
+            Experienced in building scalable web applications, APIs, and distributed systems with a focus on user-centric design and performance.
           </p>
           <p className="text-xs text-white/60 leading-relaxed mt-6">
-            I am an advocate for a people-user experience. I understand design and product-focused innovative
-            excellence.
+            Adept at collaborating with cross-functional teams to deliver innovative software solutions that drive business success.
           </p>
         </div>
 
@@ -67,11 +66,13 @@ const Hero = () => {
               <div className="h-28 w-[70%] rounded-full bg-[#22c55e]/10 blur-[60px]" />
             </div>
             <h2
-              className="text-7xl md:text-8xl lg:text-9xl font-light italic tracking-wide text-white mb-8"
-              style={{ fontFamily: "cursive, Georgia, serif" }}
+              className="text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white mb-8"
             >
-              John Mossah
+              Debisa Abebe
             </h2>
+            <div className="mb-4">
+              <span className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#22c55e]">Software Engineer</span>
+            </div>
 
             {/* Timeline element at bottom center */}
             <div className="flex items-center justify-center my-16">
@@ -87,8 +88,8 @@ const Hero = () => {
           {/* bottom small experience note */}
           <div className="mt-12 flex items-center justify-center">
             <div className="text-xs text-white/50">
-              — 8 Years of experience
-              <span className="block text-xs text-white/40">2006 - 2017</span>
+              — 5+ Years of experience
+              <span className="block text-xs text-white/40">2019 - Present</span>
             </div>
           </div>
         </div>

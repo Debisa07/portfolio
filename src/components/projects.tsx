@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { useEffect, useMemo, useState } from "react"
 
 interface Project {
@@ -61,7 +62,7 @@ const ProjectCard = ({ project, isActive }: { project: Project; isActive: boolea
       className={
         "relative rounded-3xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] " +
         (isActive
-          ? "h-[450px] shadow-[0_20px_50px_rgba(34,197,94,0.2)] scale-100 opacity-100 grayscale-0 z-10 ring-1 ring-[#22c55e]/40"
+          ? "h-[450px] shadow-[0_20px_50px_rgba(34,197,94,0.2)] scale-100 opacity-100 grayscale-0 z-10 ring-1 ring-[#22c55e]/60"
           : "h-[450px] scale-[0.85] opacity-40 grayscale blur-[1px] z-0 border border-white/5")
       }
     >
@@ -92,7 +93,7 @@ const ProjectCard = ({ project, isActive }: { project: Project; isActive: boolea
             </h3>
           </div>
           
-          <p className="text-gray-300 text-sm leading-relaxed max-w-[90%] line-clamp-2">
+          <p className="text-white/60 text-sm leading-relaxed max-w-[90%] line-clamp-2">
             {project.description}
           </p>
 
@@ -140,14 +141,28 @@ const ProjectsShowcase = () => {
 
   return (
     <section id="projects" className="py-24 bg-[#1a1a1a] overflow-hidden relative">
+      {/* Huge background WORK */}
+      <motion.h1
+          className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none select-none overflow-hidden"
+          style={{ opacity: 0.04 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.04 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.6, ease: "easeOut" }}
+        >
+          <span className="font-grotesk font-extrabold text-[12rem] md:text-[20rem] leading-[0.85] tracking-[-0.03em] text-white/10 uppercase">
+            Work
+          </span>
+      </motion.h1>
+
       {/* Glow Effects */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#22c55e]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#22c55e]/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
-      <div className="px-4 md:px-8 max-w-[1400px] mx-auto relative z-10">
-        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-16 px-4">
+      <div className="px-4 md:px-8 max-w-[1200px] mx-auto relative z-10">
+        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-16 px-4">
           <div className="max-w-2xl">
-            <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[0.9]">
+            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[0.9]">
               Selected <br /> <span className="text-[#22c55e]">Works.</span>
             </h2>
           </div>
@@ -182,9 +197,9 @@ const ProjectsShowcase = () => {
         </div>
 
         {/* Footer Navigation */}
-        <div className="mt-16 px-4 flex flex-col md:flex-row items-center justify-between gap-8 max-w-5xl mx-auto">
+        <div className="mt-10 px-4 flex flex-col md:flex-row items-center justify-between gap-8 max-w-4xl mx-auto">
           {/* Progress Line */}
-          <div className="w-full md:w-64 h-[2px] bg-white/10 rounded-full overflow-hidden relative">
+          <div className="w-full md:w-56 h-[2px] bg-white/10 rounded-full overflow-hidden relative">
             <div 
               className="absolute inset-y-0 left-0 bg-[#22c55e] transition-all duration-700 ease-out shadow-[0_0_10px_#22c55e]"
               style={{ width: `${((activeIndex + 1) / items.length) * 100}%` }}

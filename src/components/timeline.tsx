@@ -59,23 +59,29 @@ export default function Timeline() {
     <div
       style={{
         minHeight: "100vh",
-        background: "radial-gradient(circle at right, rgba(34,197,94,0.06), transparent 40%), #1a1a1a",
+       background: "radial-gradient(circle at right, rgba(34,197,94,0.06), transparent 40%), #1a1a1a",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         color: "white",
-        padding: "3rem 1.5rem",
+        padding: "3rem 0.5rem",
       }}
     >
       <div
         style={{
+          margin: "0 auto",
           width: "100%",
-          maxWidth: "1180px",
+          maxWidth: "850px",
           display: "grid",
-          gridTemplateColumns: "320px 1fr 260px",
-          gap: "40px",
+          gridTemplateColumns: "300px 80px 220px",
+          gap: "32px",
           alignItems: "center",
           position: "relative",
+          boxShadow: "0 8px 32px 0 rgba(34,197,94,0.08)",
+          borderRadius: "24px",
+          background: "rgba(26,26,26,0.85)",
+          border: "1.5px solid rgba(34,197,94,0.10)",
+          padding: "32px 32px",
         }}
       >
         {/* LEFT – PROJECT DETAILS CARD */}
@@ -84,71 +90,73 @@ export default function Timeline() {
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
-            marginLeft: "18px",
+            marginLeft: "0",
           }}
         >
           <div
             style={{
-              background: "rgba(26,26,26,0.6)",
-              border: "1px solid rgba(34,197,94,0.2)",
-              borderRadius: "14px",
-              padding: "28px 30px",
-              backdropFilter: "blur(12px)",
+              background: "rgba(34,197,94,0.08)",
+              border: "1.5px solid rgba(34,197,94,0.18)",
+              borderRadius: "18px",
+              padding: "18px 18px 18px 22px",
+              backdropFilter: "blur(10px)",
               width: "100%",
-              minHeight: "240px",
+              minHeight: "120px",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
+              boxShadow: "0 4px 24px 0 rgba(34,197,94,0.10)",
               transition: "all 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
             <div>
               <div
                 style={{
-                  fontSize: "13px",
+                  fontSize: "12px",
                   fontWeight: 700,
                   color: "#22c55e",
-                  marginBottom: "10px",
+                  marginBottom: "6px",
                   textTransform: "uppercase",
-                  letterSpacing: "1px",
-                  opacity: 0.9,
+                  letterSpacing: "1.5px",
+                  opacity: 0.95,
                 }}
               >
                 Role
               </div>
               <div
                 style={{
-                  fontSize: "20px",
+                  fontSize: "18px",
                   fontWeight: 700,
-                  marginBottom: "14px",
-                  lineHeight: 1.3,
+                  marginBottom: "10px",
+                  lineHeight: 1.2,
                   transition: "all 0.45s ease",
+                  color: "#fff",
+                  letterSpacing: "0.01em",
                 }}
               >
                 {experiences[activeIndex].title}
               </div>
-
               <div
                 style={{
-                  fontSize: "14px",
+                  fontSize: "13px",
                   fontWeight: 500,
                   color: "#cbd5e1",
-                  marginBottom: "20px",
+                  marginBottom: "14px",
                   transition: "all 0.45s ease",
                 }}
               >
                 {experiences[activeIndex].company}
               </div>
             </div>
-
             <div
               style={{
-                fontSize: "13px",
-                color: "#94a3b8",
-                lineHeight: 1.7,
-                paddingTop: "16px",
-                borderTop: "1px solid rgba(34,197,94,0.15)",
+                fontSize: "12px",
+                color: "#b6e7c9",
+                lineHeight: 1.6,
+                paddingTop: "10px",
+                borderTop: "1px solid rgba(34,197,94,0.13)",
                 transition: "all 0.45s ease",
+                opacity: 0.92,
               }}
             >
               {experiences[activeIndex].detail}
@@ -161,55 +169,74 @@ export default function Timeline() {
           style={{
             position: "relative",
             width: "100%",
-            height: "420px",
+            height: "320px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            overflow: "visible",
           }}
         >
-          {/* Curved Line */}
-          <svg width="140" height="420" viewBox="0 0 140 420" fill="none" style={{ position: "absolute" }}>
+          {/* Double Curved Lines + Smooth Animated Node */}
+          <svg width="120" height="320" viewBox="0 0 120 320" fill="none" style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", overflow: "visible" }}>
             <defs>
               <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#22c55e" stopOpacity="0" />
+                <stop offset="30%" stopColor="#22c55e" stopOpacity="0.5" />
                 <stop offset="50%" stopColor="#22c55e" stopOpacity="1" />
+                <stop offset="70%" stopColor="#22c55e" stopOpacity="0.5" />
                 <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
               </linearGradient>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                <feMerge>
+                   <feMergeNode in="coloredBlur" />
+                   <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
             </defs>
+            
+            {/* Left Curve */}
             <path
-              d="M 70 0 C 70 120, 20 170, 20 225 C 20 280, 70 330, 70 420"
+              d="M 60 10 Q 30 160 60 310"
               stroke="url(#grad)"
-              strokeWidth="3"
+              strokeWidth="2"
               strokeLinecap="round"
               fill="none"
+              opacity="0.8"
             />
+            {/* Right Curve - "The Added Line" */}
+            <path
+              d="M 60 10 Q 90 160 60 310"
+              stroke="url(#grad)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              fill="none"
+              opacity="0.8"
+            />
+
+            {/* Central Node Group with Smooth Transition */}
+            <g 
+              style={{ 
+                transform: `translate(60px, ${40 + (activeIndex * 55)}px)`, 
+                transition: "transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)" 
+              }}
+            >
+              {/* Inner Core */}
+              <circle r="6" fill="#22c55e" filter="url(#glow)" />
+              
+              {/* Pulse Ring 1 */}
+              <circle r="12" stroke="#22c55e" strokeWidth="1.5" opacity="0.6" fill="none">
+                 <animate attributeName="r" values="10;16;10" dur="3s" repeatCount="indefinite" />
+                 <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite" />
+              </circle>
+              
+              {/* Pulse Ring 2 (Offset) */}
+              <circle r="8" stroke="#22c55e" strokeWidth="1" opacity="0.4" fill="none">
+                 <animate attributeName="r" values="8;24;8" dur="4s" repeatCount="indefinite" />
+                 <animate attributeName="opacity" values="0.4;0;0.4" dur="4s" repeatCount="indefinite" />
+              </circle>
+            </g>
           </svg>
-
-        
-
-          <style>{`
-            @keyframes pulse-node {
-              0%, 100% {
-                box-shadow: 0 0 40px rgba(34,197,94,0.4), inset 0 0 18px rgba(34,197,94,0.08);
-                transform: scale(1);
-              }
-              50% {
-                box-shadow: 0 0 56px rgba(34,197,94,0.55), inset 0 0 26px rgba(34,197,94,0.12);
-                transform: scale(1.015);
-              }
-            }
-
-            @keyframes arrow-float {
-              0%, 100% {
-                transform: translateY(0px);
-                opacity: 0.85;
-              }
-              50% {
-                transform: translateY(-10px);
-                opacity: 1;
-              }
-            }
-          `}</style>
         </div>
 
         {/* RIGHT – DATE AND MONTH LIST */}
@@ -217,10 +244,11 @@ export default function Timeline() {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "42px",
+            gap: "22px",
             color: "#94a3b8",
-            fontSize: "13px",
-            paddingRight: "24px",
+            fontSize: "12px",
+            paddingRight: "0",
+            width: "100%",
           }}
         >
           {experiences.map((exp, index) => (
@@ -230,11 +258,13 @@ export default function Timeline() {
               style={{
                 cursor: "pointer",
                 transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                padding: "14px 0",
+                padding: "8px 12px 8px 14px",
                 borderLeft: activeIndex === index ? "3px solid #22c55e" : "2px solid rgba(34,197,94,0.15)",
-                paddingLeft: "18px",
                 color: activeIndex === index ? "#22c55e" : "#94a3b8",
-                fontWeight: activeIndex === index ? 600 : 400,
+                fontWeight: activeIndex === index ? 700 : 400,
+                background: activeIndex === index ? "linear-gradient(90deg, rgba(34,197,94,0.12) 0%, rgba(34,197,94,0.02) 100%)" : "transparent",
+                borderRadius: "4px",
+                width: "100%",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = "#22c55e"
@@ -247,8 +277,8 @@ export default function Timeline() {
                 }
               }}
             >
-              <div style={{ fontWeight: 700, fontSize: "16px", marginBottom: "6px" }}>{exp.date}</div>
-              <div style={{ fontSize: "14px", opacity: 0.75 }}>{exp.month}</div>
+              <div style={{ fontWeight: 700, fontSize: "14px", marginBottom: "2px" }}>{exp.date}</div>
+              <div style={{ fontSize: "12px", opacity: 0.75 }}>{exp.month}</div>
             </div>
           ))}
         </div>
