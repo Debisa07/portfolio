@@ -66,7 +66,7 @@ const Hero = () => {
               <div className="h-28 w-[70%] rounded-full bg-[#22c55e]/10 blur-[60px]" />
             </div>
             <h2
-              className="text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white mb-8"
+              className="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8"
             >
               Debisa Abebe
             </h2>

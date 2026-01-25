@@ -1,8 +1,7 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { motion } from "framer-motion"
+import { useMemo, useState } from "react"
 
 interface TechItem {
   name: string
@@ -10,256 +9,104 @@ interface TechItem {
   logo: string
 }
 
-// Black and white tech logos (using simple SVG representations)
 const techStack: TechItem[] = [
-  // Frontend
-  {
-    name: "React",
-    category: "Frontend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-  },
-  {
-    name: "Next.js",
-    category: "Frontend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-  },
-  {
-    name: "Vue.js",
-    category: "Frontend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg",
-  },
-  {
-    name: "Angular",
-    category: "Frontend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg",
-  },
-  {
-    name: "React Native",
-    category: "Frontend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-  },
-  {
-    name: "Flutter",
-    category: "Frontend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg",
-  },
-  {
-    name: "TypeScript",
-    category: "Frontend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-  },
-  {
-    name: "JavaScript",
-    category: "Frontend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-  },
-  {
-    name: "TailwindCSS",
-    category: "Frontend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-  },
-  // Backend
-  {
-    name: "Node.js",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "NestJS",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg",
-  },
-  {
-    name: "Python",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-  },
-  {
-    name: "FastAPI",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
-  },
-  {
-    name: "Django",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg",
-  },
-  {
-    name: "Flask",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg",
-  },
-  {
-    name: "REST",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swagger/swagger-original.svg",
-  },
-  {
-    name: "GraphQL",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg",
-  },
-  {
-    name: "PostgreSQL",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    name: "MongoDB",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-  },
-  {
-    name: "Redis",
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
-  },
+  { name: "React", category: "Frontend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+  { name: "Next.js", category: "Frontend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+  { name: "Vue.js", category: "Frontend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" },
+  { name: "Angular", category: "Frontend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" },
+  { name: "Flutter", category: "Frontend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg" },
+  { name: "TypeScript", category: "Frontend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+  { name: "TailwindCSS", category: "Frontend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+
+  { name: "Node.js", category: "Backend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+  { name: "NestJS", category: "Backend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg" },
+  { name: "Python", category: "Backend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+  { name: "FastAPI", category: "Backend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
+  { name: "Django", category: "Backend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" },
+  { name: "PostgreSQL", category: "Backend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+  { name: "MongoDB", category: "Backend", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
 ]
 
-const TechStack = () => {
-  const sectionRef = useRef<HTMLElement>(null)
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
+export default function TechStack() {
+  const [activeTab, setActiveTab] = useState<"Frontend" | "Backend">("Frontend")
 
-  const scroll = (direction: "left" | "right") => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 400
-      scrollContainerRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      })
-    }
-  }
+  const filteredTech = useMemo(
+    () => techStack.filter((tech) => tech.category === activeTab),
+    [activeTab]
+  )
 
   return (
-    <section id="tech-stack" ref={sectionRef} className="py-16 md:py-24">
-      <div className="px-4 md:px-8 max-w-7xl mx-auto">
-        {/* Section Header */}
+    <section id="tech-stack" className="relative py-20">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Header */}
         <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-14"
         >
-          <h2 className="text-4xl md:text-5xl font-semibold text-foreground leading-[1.2]">Core Skills</h2>
-          <p className="text-muted-foreground mt-4 text-lg">
-            A comprehensive tech stack spanning frontend, backend, and modern development practices.
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+            Tech Stack
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg">
+            Modern tools I use to design, build, and scale applications
           </p>
         </motion.div>
 
-        {/* Frontend Section */}
-        <motion.div
-          className="mb-20"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-8">Frontend</h3>
-          <div className="relative group">
-            <div
-              ref={scrollContainerRef}
-              className="flex gap-8 overflow-x-auto pb-4 scroll-smooth [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-muted [&::-webkit-scrollbar-thumb]:bg-muted-foreground [&::-webkit-scrollbar-thumb]:rounded-full"
-            >
-              {techStack
-                .filter((tech) => tech.category === "Frontend")
-                .map((tech, index) => (
-                  <motion.div
-                    key={tech.name}
-                    className="flex-shrink-0 flex flex-col items-center gap-4"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{
-                      duration: 0.6,
-                      delay: 0.15 + index * 0.05,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                  >
-                    <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-lg border border-border bg-card hover:bg-muted transition-colors duration-300 grayscale hover:grayscale-0">
-                      <img
-                        src={tech.logo || "/placeholder.svg"}
-                        alt={tech.name}
-                        className="w-12 h-12 md:w-16 md:h-16 object-contain"
-                      />
-                    </div>
-                    <p className="text-sm font-medium text-foreground text-center whitespace-nowrap">{tech.name}</p>
-                  </motion.div>
-                ))}
-            </div>
-            {/* Scroll Buttons */}
-            <button
-              onClick={() => scroll("left")}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-background border border-border rounded-full p-2 hover:bg-muted transition-colors duration-300 opacity-0 group-hover:opacity-100"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-background border border-border rounded-full p-2 hover:bg-muted transition-colors duration-300 opacity-0 group-hover:opacity-100"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+        {/* Tabs */}
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex rounded-full bg-background/60 backdrop-blur border border-border p-1">
+            {["Frontend", "Backend"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab as any)}
+                className={`px-6 py-2 text-sm font-medium rounded-full transition-all
+                  ${
+                    activeTab === tab
+                      ? "bg-[#22c55e] text-black shadow"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Backend Section */}
+        {/* Grid */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          layout
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
         >
-          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-8">Backend</h3>
-          <div className="relative group">
-            <div
-              ref={scrollContainerRef}
-              className="flex gap-8 overflow-x-auto pb-4 scroll-smooth [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-muted [&::-webkit-scrollbar-thumb]:bg-muted-foreground [&::-webkit-scrollbar-thumb]:rounded-full"
+          {filteredTech.map((tech) => (
+            <motion.div
+              key={tech.name}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 260, damping: 18 }}
+              className="group relative rounded-2xl border border-border bg-background/60 backdrop-blur p-6 shadow-sm hover:shadow-xl"
             >
-              {techStack
-                .filter((tech) => tech.category === "Backend")
-                .map((tech, index) => (
-                  <motion.div
-                    key={tech.name}
-                    className="flex-shrink-0 flex flex-col items-center gap-4"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{
-                      duration: 0.6,
-                      delay: 0.25 + index * 0.05,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                  >
-                    <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-lg border border-border bg-card hover:bg-muted transition-colors duration-300 grayscale hover:grayscale-0">
-                      <img
-                        src={tech.logo || "/placeholder.svg"}
-                        alt={tech.name}
-                        className="w-12 h-12 md:w-16 md:h-16 object-contain"
-                      />
-                    </div>
-                    <p className="text-sm font-medium text-foreground text-center whitespace-nowrap">{tech.name}</p>
-                  </motion.div>
-                ))}
-            </div>
-            {/* Scroll Buttons */}
-            <button
-              onClick={() => scroll("left")}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-background border border-border rounded-full p-2 hover:bg-muted transition-colors duration-300 opacity-0 group-hover:opacity-100"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-background border border-border rounded-full p-2 hover:bg-muted transition-colors duration-300 opacity-0 group-hover:opacity-100"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
+              {/* Glow */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-[#22c55e]/20 via-transparent to-transparent" />
+
+              <div className="relative flex flex-col items-center gap-4">
+                <img
+                  src={tech.logo}
+                  alt={tech.name}
+                  className="w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+                <p className="text-sm font-semibold tracking-wide">
+                  {tech.name}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
   )
 }
-
-export default TechStack

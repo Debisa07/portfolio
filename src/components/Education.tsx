@@ -38,10 +38,10 @@ export default function Education() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <section className="min-h-screen bg-[#0a0a0a] text-white py-24 px-6 flex justify-center items-center">
-      <div className="max-w-7xl w-full">
+    <section className="min-h-[60vh] bg-[#1a1a1a] text-white py-10 px-2 flex justify-center items-center">
+      <div className="max-w-2xl w-full mx-auto">
         {/* Header Section */}
-        <div className="mb-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
           <div>
             <h2 className="text-6xl md:text-8xl font-bold tracking-tight leading-[0.9]">
               EDUCATION <br />
@@ -69,18 +69,19 @@ export default function Education() {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {experiences.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ scale: 1.04, boxShadow: item.highlight ? "0 0 32px #22c55e44" : "0 0 16px #22c55e22" }}
+              transition={{ type: "spring", stiffness: 120, damping: 18, delay: index * 0.08 }}
               viewport={{ once: true }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               className={`
-                relative p-8 h-80 flex flex-col justify-between transition-colors duration-500 rounded-tr-3xl rounded-br-3xl rounded-bl-3xl
+                relative p-5 h-56 flex flex-col justify-between transition-colors duration-500 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl
                 ${
                   item.highlight
                     ? "bg-[#111] border border-white/10"
@@ -88,7 +89,7 @@ export default function Education() {
                 }
               `}
               style={{
-                clipPath: "polygon(50px 0, 100% 0, 100% 100%, 0 100%, 0 50px)",
+                clipPath: "polygon(30px 0, 100% 0, 100% 100%, 0 100%, 0 30px)",
               }}
             >
               {/* Number */}

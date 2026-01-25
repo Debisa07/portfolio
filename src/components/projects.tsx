@@ -60,10 +60,10 @@ const ProjectCard = ({ project, isActive }: { project: Project; isActive: boolea
   return (
     <div
       className={
-        "relative rounded-3xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] " +
+        "relative rounded-2xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] " +
         (isActive
-          ? "h-[450px] shadow-[0_20px_50px_rgba(34,197,94,0.2)] scale-100 opacity-100 grayscale-0 z-10 ring-1 ring-[#22c55e]/60"
-          : "h-[450px] scale-[0.85] opacity-40 grayscale blur-[1px] z-0 border border-white/5")
+          ? "h-[320px] shadow-[0_12px_32px_rgba(34,197,94,0.18)] scale-100 opacity-100 grayscale-0 z-10 ring-1 ring-[#22c55e]/60"
+          : "h-[320px] scale-[0.85] opacity-40 grayscale blur-[1px] z-0 border border-white/5")
       }
     >
       <img
@@ -88,7 +88,7 @@ const ProjectCard = ({ project, isActive }: { project: Project; isActive: boolea
       >
         <div className="space-y-4">
           <div className="overflow-hidden">
-            <h3 className="text-3xl font-bold text-white leading-tight tracking-tight">
+            <h3 className="text-xl font-bold text-white leading-tight tracking-tight">
               {project.title}
             </h3>
           </div>
@@ -131,8 +131,8 @@ const ProjectsShowcase = () => {
     return () => clearInterval(interval)
   }, [items.length, isPaused])
 
-  const cardWidth = 340
-  const cardGap = 32
+  const cardWidth = 240
+  const cardGap = 18
   const trackOffset = activeIndex * (cardWidth + cardGap)
   
   const trackStyle = {
@@ -140,7 +140,7 @@ const ProjectsShowcase = () => {
   }
 
   return (
-    <section id="projects" className="py-24 bg-[#1a1a1a] overflow-hidden relative">
+    <section id="projects" className="py-10 bg-[#1a1a1a] overflow-hidden relative">
       {/* Huge background WORK */}
       <motion.h1
           className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none select-none overflow-hidden"
@@ -159,21 +159,26 @@ const ProjectsShowcase = () => {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#22c55e]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#22c55e]/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
-      <div className="px-4 md:px-8 max-w-[1200px] mx-auto relative z-10">
-        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-16 px-4">
-          <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[0.9]">
-              Selected <br /> <span className="text-[#22c55e]">Works.</span>
-            </h2>
-          </div>
-          <div className="flex flex-col items-start md:items-end gap-2 text-white/60">
-            <span className="text-sm uppercase tracking-[0.4em] font-medium text-[#22c55e]">Portfolio 2024</span>
-            <div className="h-px w-24 bg-[#22c55e]/30 my-2" />
-          </div>
+      <div className="px-2 md:px-4 max-w-[900px] mx-auto relative z-10">
+        <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-10 px-2">
+          <div className="flex flex-col items-start gap-2 text-white/60">
+  <span className="text-sm uppercase tracking-[0.4em] font-medium text-[#22c55e]">
+    Selected Works
+  </span>
+  <div className="h-px w-24 bg-[#22c55e]/30 my-2" />
+</div>
+
+<div className="flex flex-col items-start md:items-end gap-2 text-white/60">
+  <span className="text-sm uppercase tracking-[0.4em] font-medium text-[#22c55e]">
+    Portfolio 2024
+  </span>
+  <div className="h-px w-24 bg-[#22c55e]/30 my-2" />
+</div>
+
         </div>
 
         <div
-          className="relative py-12"
+          className="relative py-6"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -197,7 +202,7 @@ const ProjectsShowcase = () => {
         </div>
 
         {/* Footer Navigation */}
-        <div className="mt-10 px-4 flex flex-col md:flex-row items-center justify-between gap-8 max-w-4xl mx-auto">
+        <div className="mt-6 px-2 flex flex-col md:flex-row items-center justify-between gap-6 max-w-2xl mx-auto">
           {/* Progress Line */}
           <div className="w-full md:w-56 h-[2px] bg-white/10 rounded-full overflow-hidden relative">
             <div 
