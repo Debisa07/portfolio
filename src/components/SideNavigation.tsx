@@ -8,10 +8,12 @@ interface Section {
 
 const sections: Section[] = [
   { id: "hero", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "clients", label: "Clients" },
-  { id: "work", label: "Fourmeta" },
-  { id: "feedback", label: "Feedback" },
+  { id: "timeline", label: "Timeline" },
+  { id: "summary", label: "Summary" },
+  { id: "education", label: "Education" },
+  { id: "projects", label: "Projects" },
+  { id: "tech-stack", label: "Tech Stack" },
+
 ];
 
 const SideNavigation = () => {
@@ -52,7 +54,7 @@ const SideNavigation = () => {
 
   return (
     <motion.div
-      className="fixed left-6 md:left-12 bottom-10 z-40 hidden lg:flex flex-col gap-3"
+      className="fixed left-4 sm:left-6 md:left-12 bottom-6 sm:bottom-10 z-40 hidden lg:flex flex-col gap-3"
       initial={{ opacity: 0, x: -20 }}
       animate={{ 
         opacity: isVisible ? 1 : 0, 

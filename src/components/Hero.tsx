@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
+import ThemeToggle from "./ThemeToggle"
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -14,7 +15,11 @@ const Hero = () => {
   const bgOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
   return (
-    <section id="hero" ref={sectionRef} className="relative min-h-[100svh] overflow-hidden bg-card text-foreground transition-colors duration-700">
+    <section id="hero" ref={sectionRef} className="relative min-h-[100svh] overflow-hidden bg-card text-foreground transition-colors duration-700 w-full overflow-x-hidden">
+      {/* Theme toggle button, positioned top-right on desktop, top-4 right-4 on mobile */}
+      <div className="absolute top-4 right-4 z-50 md:top-8 md:right-8">
+        <ThemeToggle />
+      </div>
       {/* Animated gradient orbs */}
       <motion.div 
         className="absolute inset-0 pointer-events-none"
@@ -48,7 +53,7 @@ const Hero = () => {
         />
       </motion.div>
 
-      <div className="container mx-auto h-full min-h-[100svh] flex items-center justify-center relative px-6">
+      <div className="container mx-auto h-full min-h-[100svh] flex flex-col items-center justify-center relative px-2 xs:px-4 sm:px-6 w-full">
         {/* Background HELLO text with immersive reveal */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none select-none overflow-hidden"
@@ -56,7 +61,7 @@ const Hero = () => {
           animate={{ opacity: 0.04, scale: 1 }}
           transition={{ duration: 2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <span className="font-grotesk font-normal text-[15vw] md:text-[18rem] leading-[0.85] tracking-[-0.04em] text-foreground/10">
+          <span className="font-grotesk font-normal text-[14vw] xs:text-[15vw] md:text-[18rem] leading-[0.85] tracking-[-0.04em] text-foreground/10">
             HELLO
           </span>
         </motion.div>
@@ -76,35 +81,46 @@ const Hero = () => {
           />
         </motion.div>
 
-        {/* Left descriptive text with stagger */}
+        {/* Descriptive text for mobile (below main content), visible on small screens; on desktop, keep left/right as before */}
+        <div className="block lg:hidden w-full mt-6 xs:mt-8 space-y-3 xs:space-y-4">
+          <p className="text-xs xs:text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal text-center">
+            Passionate and results-driven Software Engineer based in Ethiopia, specializing in full-stack development and cloud solutions.
+          </p>
+          <p className="text-xs xs:text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal text-center">
+            Experienced in building scalable web applications, APIs, and distributed systems with a focus on user-centric design and performance.
+          </p>
+          <p className="text-xs xs:text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal text-center">
+            Adept at collaborating with cross-functional teams to deliver innovative software solutions.
+          </p>
+        </div>
+        {/* Left descriptive text for desktop */}
         <motion.div 
           className="absolute left-0 top-1/3 w-1/4 px-8 hidden lg:block"
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.2, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <p className="text-small text-muted-foreground/60 leading-relaxed font-grotesk font-normal">
+          <p className="text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal">
             Passionate and results-driven Software Engineer based in Ethiopia, specializing in full-stack development and cloud solutions.
           </p>
         </motion.div>
-
-        {/* Right descriptive text with stagger */}
+        {/* Right descriptive text for desktop */}
         <motion.div 
           className="absolute right-0 top-1/3 w-1/4 px-8 hidden lg:block text-right"
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.2, delay: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <p className="text-small text-muted-foreground/60 leading-relaxed font-grotesk font-normal">
+          <p className="text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal">
             Experienced in building scalable web applications, APIs, and distributed systems with a focus on user-centric design and performance.
           </p>
-          <p className="text-small text-muted-foreground/60 leading-relaxed mt-6 font-grotesk font-normal">
+          <p className="text-sm text-muted-foreground/60 leading-relaxed mt-6 font-grotesk font-normal">
             Adept at collaborating with cross-functional teams to deliver innovative software solutions.
           </p>
         </motion.div>
 
         {/* Center content */}
-        <div className="w-full max-w-3xl text-center">
+        <div className="w-full max-w-3xl text-center min-w-0">
           <motion.div style={{ y: nameY, opacity: nameOpacity }} className="relative">
             {/* Glow effect behind name */}
             <motion.div 
@@ -117,7 +133,7 @@ const Hero = () => {
 
             {/* Name with letter-by-letter animation */}
             <motion.h2
-              className="mt-8 text-display font-grotesk font-normal tracking-tight text-foreground mb-8"
+              className="mt-8 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-display font-grotesk font-normal tracking-tight text-foreground mb-8 break-words"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -147,7 +163,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <span className="text-heading font-grotesk font-normal text-primary/80">
+              <span className="text-lg xs:text-xl sm:text-2xl md:text-heading font-grotesk font-normal text-primary/80">
                 Software Engineer
               </span>
               <motion.div
@@ -159,9 +175,9 @@ const Hero = () => {
             </motion.div>
 
             {/* Animated timeline element */}
-            <div className="flex items-center justify-center my-16">
+            <div className="flex items-center justify-center my-8 xs:my-12 sm:my-16">
               <motion.div
-                className="w-[1px] h-16 bg-gradient-to-b from-primary/40 to-transparent"
+                className="w-[1px] h-10 xs:h-16 bg-gradient-to-b from-primary/40 to-transparent"
                 initial={{ scaleY: 0, opacity: 0 }}
                 animate={{ scaleY: 1, opacity: 1 }}
                 transition={{ duration: 1.4, delay: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -171,12 +187,12 @@ const Hero = () => {
 
           {/* Experience note */}
           <motion.div 
-            className="mt-12 flex items-center justify-center"
+            className="mt-8 xs:mt-12 flex items-center justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="text-small text-muted-foreground/50 font-grotesk font-normal">
+            <div className="text-xs xs:text-small text-muted-foreground/50 font-grotesk font-normal text-center">
               — 5+ Years of experience
               <span className="block text-muted-foreground/40 mt-1">2019 - Present</span>
             </div>

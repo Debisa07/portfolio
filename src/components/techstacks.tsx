@@ -89,48 +89,45 @@ export default function TechStack() {
   return (
     <section
       id="tech-stack"
-      className="relative py-6 xs:py-8 sm:py-10 md:py-12 bg-background w-full overflow-x-hidden"
+      className="relative py-10 md:py-12 bg-background"
       style={{
         background:
           "radial-gradient(circle at right, hsl(var(--foreground)/0.04), transparent 40%), hsl(var(--background))",
       }}
     >
       {/* Ambient glows to match Timeline aesthetics */}
-      <div className="pointer-events-none absolute top-0 right-0 w-[160px] xs:w-[220px] sm:w-[320px] md:w-[420px] h-[160px] xs:h-[220px] sm:h-[320px] md:h-[420px] bg-foreground/10 rounded-full blur-[60px] xs:blur-[80px] sm:blur-[120px] -translate-y-1/2 translate-x-1/4" />
-      <div className="pointer-events-none absolute bottom-0 left-0 w-[160px] xs:w-[220px] sm:w-[320px] md:w-[420px] h-[160px] xs:h-[220px] sm:h-[320px] md:h-[420px] bg-foreground/10 rounded-full blur-[60px] xs:blur-[80px] sm:blur-[120px] translate-y-1/3 -translate-x-1/4" />
-      <div className="max-w-full sm:max-w-[850px] mx-auto px-2 xs:px-3 sm:px-4 md:px-6 relative z-10">
+      <div className="pointer-events-none absolute top-0 right-0 w-[420px] h-[420px] bg-foreground/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
+      <div className="pointer-events-none absolute bottom-0 left-0 w-[420px] h-[420px] bg-foreground/10 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4" />
+      <div className="max-w-[850px] mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-4 xs:mb-6 sm:mb-10"
+          className="text-center mb-10"
         >
-          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
             Tech Stack
           </h2>
-          <p className="mt-1 xs:mt-2 sm:mt-3 text-muted-foreground text-xs xs:text-sm sm:text-base md:text-lg">
+          <p className="mt-3 text-muted-foreground text-base md:text-lg">
             Modern tools I use to design, build, and scale applications
           </p>
         </motion.div>
 
         {/* Tabs */}
-        <div className="flex justify-center mb-4 xs:mb-6 sm:mb-8 w-full overflow-x-auto scrollbar-none">
-          <div className="inline-flex flex-nowrap gap-1 xs:gap-2 sm:gap-0 rounded-full bg-background/60 backdrop-blur border border-border p-1 w-full max-w-full overflow-x-auto scrollbar-none">
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex rounded-full bg-background/60 backdrop-blur border border-border p-1">
             {categories.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-3 xs:px-4 sm:px-6 py-2 text-xs xs:text-sm sm:text-sm font-medium rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+                className={`px-6 py-2 text-sm font-medium rounded-full transition-all
                   ${
                     activeTab === tab
                       ? "bg-foreground/90 text-background shadow"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
-                tabIndex={0}
-                aria-pressed={activeTab === tab}
-                aria-label={`Show ${tab} technologies`}
               >
                 {tab}
               </button>
@@ -141,7 +138,7 @@ export default function TechStack() {
         {/* Grid */}
         <motion.div
           layout
-          className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 xs:gap-3 sm:gap-4 w-full"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
         >
           {filteredTech.map((tech) => (
             <motion.div
@@ -152,7 +149,7 @@ export default function TechStack() {
               exit={{ opacity: 0, scale: 0.9 }}
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 240, damping: 20 }}
-              className="group relative rounded-xl border border-border/60 bg-background/50 backdrop-blur p-2 xs:p-3 sm:p-4 shadow-sm hover:shadow-xl min-w-0"
+              className="group relative rounded-xl border border-border/60 bg-background/50 backdrop-blur p-4 shadow-sm hover:shadow-xl"
             >
               {/* Glow */}
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-foreground/10 via-transparent to-transparent" />
@@ -165,15 +162,13 @@ export default function TechStack() {
                 transition={{ duration: 1.6, ease: "easeOut" }}
               />
 
-              <div className="relative flex flex-col items-center gap-1 xs:gap-2 sm:gap-4">
+              <div className="relative flex flex-col items-center gap-4">
                 <img
                   src={tech.logo || "/placeholder.svg"}
                   alt={tech.name}
-                  className="w-7 xs:w-8 sm:w-12 h-7 xs:h-8 sm:h-12 object-contain transition-transform duration-300 group-hover:scale-110"
-                  draggable="false"
-                  loading="lazy"
+                  className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
                 />
-                <p className="text-[10px] xs:text-xs md:text-sm font-semibold tracking-wide text-center break-words max-w-[80px] xs:max-w-[100px]">
+                <p className="text-xs md:text-sm font-semibold tracking-wide">
                   {tech.name}
                 </p>
               </div>

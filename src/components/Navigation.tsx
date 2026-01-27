@@ -1,8 +1,10 @@
 import { motion, useScroll, useMotionValueEvent, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { scrollY } = useScroll();
   const scrollProgress = useMotionValue(0);
   
@@ -73,51 +75,77 @@ const Navigation = () => {
           <sup className="text-[0.5em] text-muted-foreground/40 ml-0.5">®</sup>
         </motion.a>
 
-        {/* Center Nav Links */}
-        <div className="hidden md:flex items-center gap-12">
-          {[
-            { href: "#hero", label: "Home", delay: 0.4 },
-            { href: "#education", label: "Education", delay: 0.45 }
-          ].map((item) => (
-            <motion.button
-              key={item.href}
-              onClick={() => scrollToSection(item.href)}
-              className="text-small font-grotesk font-normal text-foreground/70 tracking-[0.12em] uppercase relative overflow-hidden"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: item.delay, ease: [0.25, 0.46, 0.45, 0.94] as const }}
-              variants={navItemVariants}
-              whileHover="hover"
+
+        {/* Desktop Nav Links */}
+        {/* <div> */}
+
+        {/* Mobile Hamburger */}
+        <div className="md:hidden flex items-center">
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((v) => !v)}
+            className="focus:outline-none"
+          >
+            <span className="sr-only">Toggle navigation</span>
+            <svg
+              className={`transition-all duration-300 w-7 h-7 ${mobileOpen ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              {item.label}
-              <motion.span
-                className="absolute bottom-0 left-0 w-full h-[1px] bg-foreground origin-left"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }}
-              />
-            </motion.button>
-          ))}
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg
+              className={`absolute transition-all duration-300 w-7 h-7 ${mobileOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </Button>
         </div>
 
-        {/* CTA Button */}
-        <motion.button
-          onClick={() => scrollToSection("#contact")}
-          className="text-small font-grotesk font-normal text-foreground/90 border border-foreground/20 rounded-full px-7 py-3 hover:border-foreground/50 transition-all duration-500 backdrop-blur-sm relative overflow-hidden group"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
-          whileHover={{ y: -3, scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <span className="relative z-10">Let's talk</span>
+        {/* Mobile Nav Drawer */}
+        {mobileOpen && (
           <motion.div
-            className="absolute inset-0 bg-foreground/5 rounded-full"
-            initial={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }}
-          />
-        </motion.button>
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-lg flex flex-col items-center justify-center gap-8 md:hidden"
+          >
+            {[
+              { href: "#hero", label: "Home" },
+              { href: "#timeline", label: "Timeline" },
+              { href: "#summery", label: "Summary" },
+              { href: "#education", label: "Education" },
+              { href: "#projects", label: "Projects" },
+              { href: "#tech-stack", label: "Tech Stack" },
+              { href: "#fourmeta", label: "Fourmeta" }
+            ].map((item, idx) => (
+              <button
+                key={item.href}
+                onClick={() => {
+                  scrollToSection(item.href);
+                  setMobileOpen(false);
+                }}
+                className="text-2xl font-grotesk font-semibold text-foreground/90 tracking-[0.12em] uppercase relative"
+                style={{ transitionDelay: `${0.1 + idx * 0.05}s` }}
+              >
+                {item.label}
+              </button>
+            ))}
+           
+          </motion.div>
+        )}
+
+        {/* CTA Button (Desktop) */}
+       
       </div>
     </motion.nav>
   );

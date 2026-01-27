@@ -24,6 +24,7 @@ const Footer = () => {
 
   return (
     <footer
+      id="fourmeta"
       ref={ref}
       className="relative border-t border-foreground/10 section-padding-lg overflow-hidden"
     >
@@ -32,25 +33,25 @@ const Footer = () => {
           variants={container}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12"
         >
           {/* Left — Identity */}
           <motion.div variants={item} className="lg:col-span-4">
-            <h3 className="text-subheading font-grotesk tracking-tight">
+            <h3 className="text-lg sm:text-xl md:text-2xl text-subheading font-grotesk tracking-tight">
               Debisa Abebe
             </h3>
-            <p className="mt-3 text-sm text-muted-foreground/70 leading-relaxed">
+            <p className="mt-2 sm:mt-3 text-xs sm:text-sm text-muted-foreground/70 leading-relaxed">
               Full-Stack Software Engineer focused on scalable systems,
               AI-augmented development, and clean product architecture.
             </p>
           </motion.div>
 
           {/* Center — Contact */}
-          <motion.div variants={item} className="lg:col-span-4">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground/50 mb-4">
+          <motion.div variants={item} className="lg:col-span-4 mt-6 md:mt-0">
+            <p className="text-[11px] sm:text-xs uppercase tracking-widest text-muted-foreground/50 mb-2 sm:mb-4">
               Contact
             </p>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
               <li>
                 <a
                   href="mailto:se.debisaabebe@gmail.com"
@@ -68,12 +69,12 @@ const Footer = () => {
           {/* Right — Links */}
           <motion.div
             variants={item}
-            className="lg:col-span-4 lg:text-right"
+            className="lg:col-span-4 lg:text-right mt-6 md:mt-0"
           >
-            <p className="text-xs uppercase tracking-widest text-muted-foreground/50 mb-4">
+            <p className="text-[11px] sm:text-xs uppercase tracking-widest text-muted-foreground/50 mb-2 sm:mb-4">
               Online
             </p>
-            <div className="flex lg:justify-end gap-6 text-sm">
+            <div className="flex flex-wrap gap-4 sm:gap-6 lg:justify-end text-xs sm:text-sm">
               <a
                 href="https://github.com/Debisa07"
                 target="_blank"
@@ -105,7 +106,7 @@ const Footer = () => {
           variants={item}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="mt-20 pt-6 border-t border-foreground/10 flex flex-col md:flex-row justify-between gap-4 text-xs text-muted-foreground/50"
+          className="mt-10 sm:mt-16 pt-4 sm:pt-6 border-t border-foreground/10 flex flex-col md:flex-row justify-between gap-2 sm:gap-4 text-[11px] sm:text-xs text-muted-foreground/50"
         >
           <span>© {new Date().getFullYear()} Debisa Abebe</span>
           <span>Built with React, TypeScript & Framer Motion</span>

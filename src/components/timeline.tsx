@@ -55,136 +55,39 @@ export default function Timeline() {
     return () => clearInterval(interval)
   }, [experiences.length])
 
+  // Only use grayscale/black/white theme variables
   return (
     <div
-      style={{
-        minHeight: "100vh",
-       background: "radial-gradient(circle at right, rgba(34,197,94,0.06), transparent 40%), #1a1a1a",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "white",
-        padding: "3rem 0.5rem",
-      }}
+      id="timeline"
+      className="min-h-[100vh] flex items-center justify-center bg-[radial-gradient(circle_at_right,theme(colors.foreground/4%),transparent_40%),theme(colors.background)] px-2 xs:px-3 sm:px-4 py-6 xs:py-8 sm:py-16 w-full overflow-x-hidden"
+      style={{ color: `hsl(var(--foreground))` }}
     >
       <div
-        style={{
-          margin: "0 auto",
-          width: "100%",
-          maxWidth: "850px",
-          display: "grid",
-          gridTemplateColumns: "300px 80px 220px",
-          gap: "32px",
-          alignItems: "center",
-          position: "relative",
-          boxShadow: "0 8px 32px 0 rgba(34,197,94,0.08)",
-          borderRadius: "24px",
-          background: "rgba(26,26,26,0.85)",
-          border: "1.5px solid rgba(34,197,94,0.10)",
-          padding: "32px 32px",
-        }}
+        className="w-full max-w-4xl bg-card/95 border border-muted-foreground/10 rounded-2xl shadow-xl grid grid-cols-1 md:grid-cols-3 gap-4 xs:gap-6 md:gap-8 items-center relative p-2 xs:p-4 sm:p-8"
       >
         {/* LEFT – PROJECT DETAILS CARD */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            marginLeft: "0",
-          }}
-        >
-          <div
-            style={{
-              background: "rgba(34,197,94,0.08)",
-              border: "1.5px solid rgba(34,197,94,0.18)",
-              borderRadius: "18px",
-              padding: "18px 18px 18px 22px",
-              backdropFilter: "blur(10px)",
-              width: "100%",
-              minHeight: "120px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              boxShadow: "0 4px 24px 0 rgba(34,197,94,0.10)",
-              transition: "all 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
-            }}
-          >
+        <div className="flex flex-col items-end justify-center w-full min-w-0">
+          <div className="bg-muted/10 border border-muted-foreground/20 rounded-xl backdrop-blur p-3 xs:p-4 w-full min-h-[100px] xs:min-h-[120px] flex flex-col justify-between shadow-md">
             <div>
-              <div
-                style={{
-                  fontSize: "12px",
-                  fontWeight: 700,
-                  color: "#22c55e",
-                  marginBottom: "6px",
-                  textTransform: "uppercase",
-                  letterSpacing: "1.5px",
-                  opacity: 0.95,
-                }}
-              >
-                Role
-              </div>
-              <div
-                style={{
-                  fontSize: "18px",
-                  fontWeight: 700,
-                  marginBottom: "10px",
-                  lineHeight: 1.2,
-                  transition: "all 0.45s ease",
-                  color: "#fff",
-                  letterSpacing: "0.01em",
-                }}
-              >
-                {experiences[activeIndex].title}
-              </div>
-              <div
-                style={{
-                  fontSize: "13px",
-                  fontWeight: 500,
-                  color: "#cbd5e1",
-                  marginBottom: "14px",
-                  transition: "all 0.45s ease",
-                }}
-              >
-                {experiences[activeIndex].company}
-              </div>
+              <div className="uppercase text-[11px] xs:text-xs font-bold tracking-wider text-foreground/90 mb-1 opacity-95">Role</div>
+              <div className="text-base xs:text-lg sm:text-xl font-bold text-foreground mb-1 xs:mb-2 leading-snug break-words">{experiences[activeIndex].title}</div>
+              <div className="text-xs xs:text-sm font-medium text-muted-foreground mb-2 xs:mb-3">{experiences[activeIndex].company}</div>
             </div>
-            <div
-              style={{
-                fontSize: "12px",
-                color: "#b6e7c9",
-                lineHeight: 1.6,
-                paddingTop: "10px",
-                borderTop: "1px solid rgba(34,197,94,0.13)",
-                transition: "all 0.45s ease",
-                opacity: 0.92,
-              }}
-            >
-              {experiences[activeIndex].detail}
-            </div>
+            <div className="text-[11px] xs:text-xs text-muted-foreground/90 leading-relaxed pt-2 border-t border-muted-foreground/20 opacity-90">{experiences[activeIndex].detail}</div>
           </div>
         </div>
 
         {/* CENTER – ANIMATED TIMELINE */}
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "320px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "visible",
-          }}
-        >
+        <div className="relative flex items-center justify-center w-full h-[140px] xs:h-[180px] sm:h-[220px] md:h-[320px] min-w-0">
           {/* Double Curved Lines + Smooth Animated Node */}
-          <svg width="120" height="320" viewBox="0 0 120 320" fill="none" style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", overflow: "visible" }}>
+          <svg width="90" height="180" viewBox="0 0 120 220" fill="none" className="absolute left-1/2 -translate-x-1/2 overflow-visible">
             <defs>
               <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#22c55e" stopOpacity="0" />
-                <stop offset="30%" stopColor="#22c55e" stopOpacity="0.5" />
-                <stop offset="50%" stopColor="#22c55e" stopOpacity="1" />
-                <stop offset="70%" stopColor="#22c55e" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
+                <stop offset="0%" stopColor="hsl(var(--foreground))" stopOpacity="0" />
+                <stop offset="30%" stopColor="hsl(var(--foreground))" stopOpacity="0.5" />
+                <stop offset="50%" stopColor="hsl(var(--foreground))" stopOpacity="1" />
+                <stop offset="70%" stopColor="hsl(var(--foreground))" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="hsl(var(--foreground))" stopOpacity="0" />
               </linearGradient>
               <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="4" result="coloredBlur" />
@@ -194,7 +97,6 @@ export default function Timeline() {
                 </feMerge>
               </filter>
             </defs>
-            
             {/* Left Curve */}
             <path
               d="M 60 10 Q 30 160 60 310"
@@ -213,25 +115,22 @@ export default function Timeline() {
               fill="none"
               opacity="0.8"
             />
-
             {/* Central Node Group with Smooth Transition */}
             <g 
               style={{ 
-                transform: `translate(60px, ${40 + (activeIndex * 55)}px)`, 
+                transform: `translate(60px, ${30 + (activeIndex * 35)}px)`, 
                 transition: "transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)" 
               }}
             >
               {/* Inner Core */}
-              <circle r="6" fill="#22c55e" filter="url(#glow)" />
-              
+              <circle r="6" fill="hsl(var(--foreground))" filter="url(#glow)" />
               {/* Pulse Ring 1 */}
-              <circle r="12" stroke="#22c55e" strokeWidth="1.5" opacity="0.6" fill="none">
+              <circle r="12" stroke="hsl(var(--foreground))" strokeWidth="1.5" opacity="0.6" fill="none">
                  <animate attributeName="r" values="10;16;10" dur="3s" repeatCount="indefinite" />
                  <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite" />
               </circle>
-              
               {/* Pulse Ring 2 (Offset) */}
-              <circle r="8" stroke="#22c55e" strokeWidth="1" opacity="0.4" fill="none">
+              <circle r="8" stroke="hsl(var(--foreground))" strokeWidth="1" opacity="0.4" fill="none">
                  <animate attributeName="r" values="8;24;8" dur="4s" repeatCount="indefinite" />
                  <animate attributeName="opacity" values="0.4;0;0.4" dur="4s" repeatCount="indefinite" />
               </circle>
@@ -240,46 +139,24 @@ export default function Timeline() {
         </div>
 
         {/* RIGHT – DATE AND MONTH LIST */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "22px",
-            color: "#94a3b8",
-            fontSize: "12px",
-            paddingRight: "0",
-            width: "100%",
-          }}
-        >
+        <div className="flex flex-col gap-2 xs:gap-3 w-full min-w-0">
           {experiences.map((exp, index) => (
-            <div
+            <button
               key={index}
               onClick={() => setActiveIndex(index)}
-              style={{
-                cursor: "pointer",
-                transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                padding: "8px 12px 8px 14px",
-                borderLeft: activeIndex === index ? "3px solid #22c55e" : "2px solid rgba(34,197,94,0.15)",
-                color: activeIndex === index ? "#22c55e" : "#94a3b8",
-                fontWeight: activeIndex === index ? 700 : 400,
-                background: activeIndex === index ? "linear-gradient(90deg, rgba(34,197,94,0.12) 0%, rgba(34,197,94,0.02) 100%)" : "transparent",
-                borderRadius: "4px",
-                width: "100%",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "#22c55e"
-                e.currentTarget.style.borderLeftColor = "#22c55e"
-              }}
-              onMouseLeave={(e) => {
-                if (activeIndex !== index) {
-                  e.currentTarget.style.color = "#94a3b8"
-                  e.currentTarget.style.borderLeftColor = "rgba(34,197,94,0.15)"
-                }
-              }}
+              className={`text-left px-2 xs:px-3 py-1.5 xs:py-2 border-l-4 rounded transition-all duration-400 cursor-pointer w-full text-xs xs:text-xs sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+                ${activeIndex === index
+                  ? 'border-foreground text-foreground bg-foreground/10 font-bold'
+                  : 'border-muted-foreground/30 text-muted-foreground hover:text-foreground hover:border-foreground/60'}
+              `}
+              style={{ background: activeIndex === index ? undefined : undefined }}
+              tabIndex={0}
+              aria-current={activeIndex === index ? 'true' : undefined}
+              aria-label={`Show experience ${exp.title}`}
             >
-              <div style={{ fontWeight: 700, fontSize: "14px", marginBottom: "2px" }}>{exp.date}</div>
-              <div style={{ fontSize: "12px", opacity: 0.75 }}>{exp.month}</div>
-            </div>
+              <div className="font-bold text-xs xs:text-xs sm:text-sm mb-0.5">{exp.date}</div>
+              <div className="opacity-75 text-[10px] xs:text-[11px] sm:text-xs">{exp.month}</div>
+            </button>
           ))}
         </div>
       </div>
