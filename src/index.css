@@ -2,11 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Luxury Dark Editorial Design System */
+/* Luxury Editorial Design System - Dark & Light Themes */
 
 @layer base {
   :root {
-    /* Dark luxury palette */
+    /* Shared tokens */
+    --radius: 0rem;
+    --nav-height: 5rem;
+    --section-padding: clamp(6rem, 12vw, 12rem);
+    --section-padding-lg: clamp(9rem, 18vw, 20rem);
+    --container-max: 1440px;
+
+    /* Typography scale - refined for editorial feel */
+    --text-hero: clamp(3.2rem, 12vw, 12rem);
+    --text-display: clamp(2.4rem, 7vw, 6rem);
+    --text-heading: clamp(1.4rem, 3.6vw, 3.2rem);
+    --text-subheading: clamp(1.125rem, 2.2vw, 1.75rem);
+    --text-body: clamp(0.9rem, 1.25vw, 1.05rem);
+    --text-small: clamp(0.7rem, 0.95vw, 0.85rem);
+
+    /* Animation timing - cinematic curves */
+    --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --duration-fast: 0.4s;
+    --duration-medium: 0.8s;
+    --duration-slow: 1.4s;
+    --font-primary: 'Space Grotesk', sans-serif;
+  }
+
+  /* Dark Theme (Default) */
+  :root.dark, .dark {
     --background: 0 0% 4%;
     --foreground: 0 0% 98%;
 
@@ -35,39 +62,44 @@
     --input: 0 0% 15%;
     --ring: 0 0% 98%;
 
-    --radius: 0rem;
-
-    /* Custom tokens */
-    --nav-height: 5rem;
-    --section-padding: clamp(6rem, 12vw, 12rem);
-    --section-padding-lg: clamp(9rem, 18vw, 20rem);
-    --container-max: 1440px;
-
-    /* Typography scale - refined for editorial feel */
-    --text-hero: clamp(3.2rem, 12vw, 12rem);
-    --text-display: clamp(2.4rem, 7vw, 6rem);
-    --text-heading: clamp(1.4rem, 3.6vw, 3.2rem);
-    --text-subheading: clamp(1.125rem, 2.2vw, 1.75rem);
-    --text-body: clamp(0.9rem, 1.25vw, 1.05rem);
-    --text-small: clamp(0.7rem, 0.95vw, 0.85rem);
-
-    /* Animation timing - cinematic curves */
-    --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-    --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --duration-fast: 0.4s;
-    --duration-medium: 0.8s;
-    --duration-slow: 1.4s;
-    --color-accent: rgb(255, 223, 0);
-    --font-primary: 'Space Grotesk', sans-serif;
+    --color-accent: 48 100% 50%;
+    --hero-bg: 0 0% 10%;
+    --glow-color: 142 71% 45%;
   }
 
-  .dark {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-    --color-accent: rgb(255, 223, 0);
-    --font-primary: 'Space Grotesk', sans-serif;
+  /* Light Theme - Refined Editorial */
+  :root.light, .light {
+    --background: 45 20% 97%;
+    --foreground: 0 0% 8%;
+
+    --card: 45 15% 95%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 45 15% 96%;
+    --popover-foreground: 0 0% 8%;
+
+    --primary: 0 0% 8%;
+    --primary-foreground: 45 20% 97%;
+
+    --secondary: 45 10% 92%;
+    --secondary-foreground: 0 0% 12%;
+
+    --muted: 45 10% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 45 15% 88%;
+    --accent-foreground: 0 0% 8%;
+
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 45 10% 85%;
+    --input: 45 10% 88%;
+    --ring: 0 0% 8%;
+
+    --color-accent: 38 92% 50%;
+    --hero-bg: 45 15% 92%;
+    --glow-color: 142 60% 40%;
   }
 }
 
@@ -86,6 +118,8 @@
     font-weight: 400;
     letter-spacing: 0.01em;
     line-height: 1.75;
+    transition: background-color 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                color 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   section {
@@ -240,6 +274,30 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Immersive hover effects */
+  .hover-lift {
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px hsl(var(--foreground) / 0.1);
+  }
+
+  /* Glow effect for accent elements */
+  .glow-effect {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.1);
+  }
+
+  /* Text gradient utility */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 @layer base {
@@ -253,8 +311,28 @@
 
 @theme inline {
   @keyframes blink {
-  50% {
-    opacity: 0;
+    50% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
     }
   }
 }

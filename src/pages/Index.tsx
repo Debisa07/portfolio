@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-
+import ThemeToggle from "@/components/ThemeToggle";
 import Education from "@/components/Education";
 import Clients from "@/components/Clients";
 import ProjectsShowcase from "@/components/projects";
@@ -22,9 +22,10 @@ const Index = () => {
         duration: 1, 
         ease: [0.25, 0.46, 0.45, 0.94] as const
       }}
-      className="min-h-screen bg-background text-foreground overflow-x-hidden"
+      className="min-h-screen bg-background text-foreground overflow-x-hidden transition-colors duration-700"
     >
       <Navigation />
+      <ThemeToggle />
       <SideNavigation />
       <ScrollIndicators />
       <Hero />
