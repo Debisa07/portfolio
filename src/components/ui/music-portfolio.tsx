@@ -5,19 +5,25 @@ import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 // Register GSAP plugin
 gsap.registerPlugin(ScrambleTextPlugin);
 
+interface TimeConfig {
+  timeZone?: string;
+  timeUpdateInterval?: number;
+  idleDelay?: number;
+}
+
 // Time Display Component
-const TimeDisplay = ({CONFIG={}}) => {
+const TimeDisplay = ({ CONFIG = {} as TimeConfig }) => {
   const [time, setTime] = useState({ hours: '', minutes: '', dayPeriod: '' });
 
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      const options = {
-        timeZone: CONFIG.timeZone,
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: CONFIG.timeZone || 'UTC',
         hour12: true,
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric"
+        hour: "numeric" as const,
+        minute: "numeric" as const,
+        second: "numeric" as const
       };
       const formatter = new Intl.DateTimeFormat("en-US", options);
       const parts = formatter.formatToParts(now);
@@ -30,9 +36,9 @@ const TimeDisplay = ({CONFIG={}}) => {
     };
 
     updateTime();
-    const interval = setInterval(updateTime, CONFIG.timeUpdateInterval);
+    const interval = setInterval(updateTime, CONFIG.timeUpdateInterval || 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [CONFIG.timeZone, CONFIG.timeUpdateInterval]);
 
   return (
     <time className="corner-item bottom-right" id="current-time">
@@ -122,7 +128,7 @@ const ProjectItem = ({ project, index, onMouseEnter, onMouseLeave, isActive, isI
 };
 
 // Main Portfolio Component
-const MusicPortfolio = ({PROJECTS_DATA=[], LOCATION={}, CALLBACKS={}, CONFIG={}, SOCIAL_LINKS={}}) => {
+const MusicPortfolio = ({PROJECTS_DATA=[], LOCATION={}, CALLBACKS={}, CONFIG = {} as TimeConfig, SOCIAL_LINKS={}}) => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [backgroundImage, setBackgroundImage] = useState('');
   const [isIdle, setIsIdle] = useState(true);
@@ -201,7 +207,7 @@ const MusicPortfolio = ({PROJECTS_DATA=[], LOCATION={}, CALLBACKS={}, CONFIG={},
         setIsIdle(true);
         startIdleAnimation();
       }
-    }, CONFIG.idleDelay);
+    }, CONFIG.idleDelay || 3000);
   }, [activeIndex, startIdleAnimation]);
 
   // Stop idle timer
