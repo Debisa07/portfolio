@@ -120,13 +120,13 @@ const Navigation = () => {
             </motion.a>
 
             <motion.a
-              href="#contact"
-              whileHover={{ y: -3, scale: 1.1 }}
-              className="text-muted-foreground hover:text-foreground transition"
-              aria-label="Contact"
-            >
-              <Phone size={18} />
-            </motion.a>
+  href="tel:+251912291624"
+  whileHover={{ y: -3, scale: 1.1 }}
+  className="text-muted-foreground hover:text-foreground transition"
+  aria-label="Phone"
+>
+  <Phone size={18} />
+</motion.a>
           </div>
 
           {/* Actions Group */}
