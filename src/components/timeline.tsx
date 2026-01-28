@@ -78,9 +78,9 @@ export default function Timeline() {
         </div>
 
         {/* CENTER – ANIMATED TIMELINE */}
-        <div className="relative flex items-center justify-center w-full h-[140px] xs:h-[180px] sm:h-[220px] md:h-[320px] min-w-0">
+        <div className="relative flex items-center justify-center w-full h-[100px] xs:h-[120px] sm:h-[150px] md:h-[320px] min-w-0">
           {/* Double Curved Lines + Smooth Animated Node */}
-          <svg width="90" height="180" viewBox="0 0 120 220" fill="none" className="absolute left-1/2 -translate-x-1/2 overflow-visible">
+          <svg width="180" height="90" viewBox="0 0 320 120" fill="none" className="rotate-0 md:rotate-90">
             <defs>
               <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="hsl(var(--foreground))" stopOpacity="0" />
@@ -99,7 +99,7 @@ export default function Timeline() {
             </defs>
             {/* Left Curve */}
             <path
-              d="M 60 10 Q 30 160 60 310"
+              d="M 10 60 Q 160 30 310 60"
               stroke="url(#grad)"
               strokeWidth="2"
               strokeLinecap="round"
@@ -108,7 +108,7 @@ export default function Timeline() {
             />
             {/* Right Curve - "The Added Line" */}
             <path
-              d="M 60 10 Q 90 160 60 310"
+              d="M 10 60 Q 160 90 310 60"
               stroke="url(#grad)"
               strokeWidth="2"
               strokeLinecap="round"
@@ -118,7 +118,7 @@ export default function Timeline() {
             {/* Central Node Group with Smooth Transition */}
             <g 
               style={{ 
-                transform: `translate(60px, ${30 + (activeIndex * 35)}px)`, 
+                transform: `translate(${10 + (activeIndex * 60)}px, 60px)`, 
                 transition: "transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)" 
               }}
             >
@@ -139,12 +139,12 @@ export default function Timeline() {
         </div>
 
         {/* RIGHT – DATE AND MONTH LIST */}
-        <div className="flex flex-col gap-2 xs:gap-3 w-full min-w-0">
+        <div className="flex flex-row flex-wrap gap-1 xs:gap-2 md:flex-col md:gap-2 xs:gap-3 w-full min-w-0 justify-center md:justify-start">
           {experiences.map((exp, index) => (
             <button
               key={index}
               onClick={() => setActiveIndex(index)}
-              className={`text-left px-2 xs:px-3 py-1.5 xs:py-2 border-l-4 rounded transition-all duration-400 cursor-pointer w-full text-xs xs:text-xs sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+              className={`text-left px-1 xs:px-2 py-1 xs:py-1.5 border-l-4 rounded transition-all duration-400 cursor-pointer w-auto text-xs xs:text-xs sm:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
                 ${activeIndex === index
                   ? 'border-foreground text-foreground bg-foreground/10 font-bold'
                   : 'border-muted-foreground/30 text-muted-foreground hover:text-foreground hover:border-foreground/60'}

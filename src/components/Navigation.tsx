@@ -1,6 +1,8 @@
 import { motion, useScroll, useMotionValueEvent, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import ThemeToggle from "./ThemeToggle";
+import { Mail, Linkedin, Phone, Github } from "lucide-react";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -75,9 +77,80 @@ const Navigation = () => {
           <sup className="text-[0.5em] text-muted-foreground/40 ml-0.5">®</sup>
         </motion.a>
 
+        {/* Desktop Right Section */}
+        <div className="hidden md:flex items-center gap-5">
+          {/* Profile Image */}
+          <motion.img
+            src="/babi.jpg" // ← replace with your image path
+            alt="Profile"
+            className="w-10 h-10 rounded-full object-cover border border-border"
+            whileHover={{ scale: 1.08 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          />
 
-        {/* Desktop Nav Links */}
-        {/* <div> */}
+          {/* Social Icons */}
+          <div className="flex items-center gap-3">
+            <motion.a
+              href="mailto:se.debisaabebe@gmail.com"
+              whileHover={{ y: -3, scale: 1.1 }}
+              className="text-muted-foreground hover:text-foreground transition"
+              aria-label="Gmail"
+            >
+              <Mail size={18} />
+            </motion.a>
+
+            <motion.a
+              href="https://www.linkedin.com/in/debisa-abebe-tu/"
+              target="_blank"
+              whileHover={{ y: -3, scale: 1.1 }}
+              className="text-muted-foreground hover:text-foreground transition"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={18} />
+            </motion.a>
+
+            <motion.a
+              href="https://github.com/Debisa07"
+              target="_blank"
+              whileHover={{ y: -3, scale: 1.1 }}
+              className="text-muted-foreground hover:text-foreground transition"
+              aria-label="GitHub"
+            >
+              <Github size={18} />
+            </motion.a>
+
+            <motion.a
+              href="#contact"
+              whileHover={{ y: -3, scale: 1.1 }}
+              className="text-muted-foreground hover:text-foreground transition"
+              aria-label="Contact"
+            >
+              <Phone size={18} />
+            </motion.a>
+          </div>
+
+          {/* Actions Group */}
+          <div className="flex items-center gap-10 pl-4 border-l border-border/50 min-w-0 mr-4">
+            <a
+              href="https://drive.google.com/file/d/1SmJa61pzK1SRNP3AWRWA-yARl6gqGKsY/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="min-w-0"
+            >
+              <Button
+                variant="outline"
+                className="font-grotesk font-semibold tracking-wide uppercase text-sm px-5 py-2 whitespace-nowrap min-w-0"
+              >
+                Download CV
+              </Button>
+            </a>
+
+            <div className="flex items-center justify-center w-10 h-10 flex-shrink-0">
+              <ThemeToggle />
+            </div>
+          </div>
+        </div>
 
         {/* Mobile Hamburger */}
         <div className="md:hidden flex items-center">
@@ -140,12 +213,20 @@ const Navigation = () => {
                 {item.label}
               </button>
             ))}
-           
+            {/* Mobile Download CV Button */}
+            <a
+              href="https://drive.google.com/file/d/1SmJa61pzK1SRNP3AWRWA-yARl6gqGKsY/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=""
+              download
+            >
+              <Button variant="outline" className="font-grotesk font-semibold tracking-wide uppercase text-lg px-8 py-3 mt-4">
+                Download CV
+              </Button>
+            </a>
           </motion.div>
         )}
-
-        {/* CTA Button (Desktop) */}
-       
       </div>
     </motion.nav>
   );

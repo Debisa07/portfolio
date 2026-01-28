@@ -2,7 +2,6 @@
 
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import ThemeToggle from "./ThemeToggle"
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -16,10 +15,6 @@ const Hero = () => {
 
   return (
     <section id="hero" ref={sectionRef} className="relative min-h-[100svh] overflow-hidden bg-card text-foreground transition-colors duration-700 w-full overflow-x-hidden">
-      {/* Theme toggle button, positioned top-right on desktop, top-4 right-4 on mobile */}
-      <div className="absolute top-4 right-4 z-50 md:top-8 md:right-8">
-        <ThemeToggle />
-      </div>
       {/* Animated gradient orbs */}
       <motion.div 
         className="absolute inset-0 pointer-events-none"
@@ -81,18 +76,6 @@ const Hero = () => {
           />
         </motion.div>
 
-        {/* Descriptive text for mobile (below main content), visible on small screens; on desktop, keep left/right as before */}
-        <div className="block lg:hidden w-full mt-6 xs:mt-8 space-y-3 xs:space-y-4">
-          <p className="text-xs xs:text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal text-center">
-            Passionate and results-driven Software Engineer based in Ethiopia, specializing in full-stack development and cloud solutions.
-          </p>
-          <p className="text-xs xs:text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal text-center">
-            Experienced in building scalable web applications, APIs, and distributed systems with a focus on user-centric design and performance.
-          </p>
-          <p className="text-xs xs:text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal text-center">
-            Adept at collaborating with cross-functional teams to deliver innovative software solutions.
-          </p>
-        </div>
         {/* Left descriptive text for desktop */}
         <motion.div 
           className="absolute left-0 top-1/3 w-1/4 px-8 hidden lg:block"
@@ -197,6 +180,19 @@ const Hero = () => {
               <span className="block text-muted-foreground/40 mt-1">2019 - Present</span>
             </div>
           </motion.div>
+
+          {/* Descriptive text for mobile */}
+          <div className="block lg:hidden w-full mt-6 xs:mt-8 space-y-3 xs:space-y-4">
+            <p className="text-xs xs:text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal text-center">
+              Passionate and results-driven Software Engineer based in Ethiopia, specializing in full-stack development and cloud solutions.
+            </p>
+            <p className="text-xs xs:text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal text-center">
+              Experienced in building scalable web applications, APIs, and distributed systems with a focus on user-centric design and performance.
+            </p>
+            <p className="text-xs xs:text-sm text-muted-foreground/60 leading-relaxed font-grotesk font-normal text-center">
+              Adept at collaborating with cross-functional teams to deliver innovative software solutions.
+            </p>
+          </div>
         </div>
       </div>
 

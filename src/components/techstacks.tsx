@@ -116,18 +116,23 @@ export default function TechStack() {
         </motion.div>
 
         {/* Tabs */}
-        <div className="flex justify-center mb-8">
-          <div className="inline-flex rounded-full bg-background/60 backdrop-blur border border-border p-1">
+        <div className="flex justify-center mb-5 xs:mb-6 sm:mb-8">
+          <div className="inline-flex rounded-full bg-background/60 backdrop-blur border border-border p-1 overflow-x-auto scrollbar-none">
             {categories.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-6 py-2 text-sm font-medium rounded-full transition-all
+                className={`
+                  px-3 xs:px-4 sm:px-6
+                  py-1 xs:py-1.5 sm:py-2
+                  text-xs xs:text-sm sm:text-base
+                  font-medium rounded-full transition-all whitespace-nowrap
                   ${
                     activeTab === tab
                       ? "bg-foreground/90 text-background shadow"
                       : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  }
+                `}
               >
                 {tab}
               </button>
@@ -138,7 +143,7 @@ export default function TechStack() {
         {/* Grid */}
         <motion.div
           layout
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
+          className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 xs:gap-3 sm:gap-4"
         >
           {filteredTech.map((tech) => (
             <motion.div
@@ -149,7 +154,7 @@ export default function TechStack() {
               exit={{ opacity: 0, scale: 0.9 }}
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 240, damping: 20 }}
-              className="group relative rounded-xl border border-border/60 bg-background/50 backdrop-blur p-4 shadow-sm hover:shadow-xl"
+              className="group relative rounded-xl border border-border/60 bg-background/50 backdrop-blur p-2 xs:p-3 sm:p-4 shadow-sm hover:shadow-xl min-w-0"
             >
               {/* Glow */}
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-gradient-to-br from-foreground/10 via-transparent to-transparent" />
@@ -162,13 +167,13 @@ export default function TechStack() {
                 transition={{ duration: 1.6, ease: "easeOut" }}
               />
 
-              <div className="relative flex flex-col items-center gap-4">
+              <div className="relative flex flex-col items-center gap-2 xs:gap-3 sm:gap-4">
                 <img
                   src={tech.logo || "/placeholder.svg"}
                   alt={tech.name}
-                  className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
+                  className="w-8 xs:w-10 sm:w-12 h-8 xs:h-10 sm:h-12 object-contain transition-transform duration-300 group-hover:scale-110"
                 />
-                <p className="text-xs md:text-sm font-semibold tracking-wide">
+                <p className="text-[10px] xs:text-xs sm:text-sm font-semibold tracking-wide text-center break-words max-w-[70px] xs:max-w-[80px]">
                   {tech.name}
                 </p>
               </div>

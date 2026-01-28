@@ -42,34 +42,39 @@ const experiences: Experience[] = [
     title: "Google Developer Group (GDG)",
     description: "Full-Stack Development Community Member",
   },
+  {
+    id: "07",
+    title: "Databricks Get Started Days",
+    description: "Data Engineering + Machine Learning",
+  },
 ]
 
 export default function Education() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <section id="education" className="min-h-[60vh] bg-background text-foreground py-8 px-2 sm:px-4 flex justify-center items-center">
+    <section id="education" className="min-h-[50vh] bg-background text-foreground py-6 px-2 sm:px-4 flex justify-center items-center">
       <div className="max-w-2xl w-full mx-auto">
         {/* Header Section */}
-        <div className="mb-8 flex flex-col md:grid md:grid-cols-2 gap-6 items-center">
+        <div className="mb-6 flex flex-col md:grid md:grid-cols-2 gap-4 items-center">
           <div>
-            <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight leading-[0.95]">
+            <h2 className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.95] break-words">
               EDUCATION <br />
               <span className="text-foreground/40">PATHWAY.</span>
             </h2>
-            <div className="mt-6 sm:mt-8 flex items-center gap-3 sm:gap-4">
-               <span className="text-foreground/70 text-base sm:text-lg font-bold">+</span>
-               <p className="text-muted-foreground max-w-xs sm:max-w-sm text-xs sm:text-sm leading-relaxed">
+            <div className="mt-4 sm:mt-6 flex items-center gap-2 sm:gap-3">
+               <span className="text-foreground/70 text-sm sm:text-base font-bold">+</span>
+               <p className="text-muted-foreground max-w-xs sm:max-w-sm text-xs sm:text-sm leading-relaxed break-words">
                  A journey of academic excellence and continuous professional development in software engineering.
                </p>
             </div>
           </div>
-          <div className="flex justify-center md:justify-end mt-6 md:mt-0">
-            <div className="group relative w-28 h-28 sm:w-40 sm:h-40 md:w-56 md:h-56 rounded-full bg-muted flex items-center justify-center cursor-pointer transition-transform duration-500 hover:scale-105">
+          <div className="flex justify-center md:justify-end mt-4 md:mt-0">
+            <div className="group relative w-24 h-24 xs:w-28 xs:h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 rounded-full bg-muted flex items-center justify-center cursor-pointer transition-transform duration-500 hover:scale-105">
               <div className="text-center z-10 transition-transform duration-500 group-hover:rotate-45">
-                <span className="block text-foreground font-semibold text-base sm:text-lg md:text-xl">View</span>
-                <span className="block text-foreground font-semibold text-base sm:text-lg md:text-xl">Certificates</span>
-                <span className="block mt-2 text-xl sm:text-2xl text-foreground">→</span>
+                <span className="block text-foreground font-semibold text-sm xs:text-base sm:text-lg md:text-xl">View</span>
+                <span className="block text-foreground font-semibold text-sm xs:text-base sm:text-lg md:text-xl">Certificates</span>
+                <span className="block mt-1 xs:mt-2 text-lg xs:text-xl sm:text-2xl text-foreground">→</span>
               </div>
               {/* Pulse Effect */}
               <div className="absolute inset-0 rounded-full border border-muted-foreground scale-110 opacity-40 animate-ping" />
@@ -77,7 +82,7 @@ export default function Education() {
           </div>
         </div>
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {experiences.map((item, index) => (
             <motion.div
               key={item.id}
@@ -89,7 +94,7 @@ export default function Education() {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               className={`
-                relative p-4 sm:p-5 h-48 sm:h-56 flex flex-col justify-between transition-colors duration-500 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl
+                relative p-3 xs:p-4 sm:p-5 h-40 xs:h-44 sm:h-48 flex flex-col justify-between transition-colors duration-500 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl
                 ${item.highlight ? 'bg-card border border-muted-foreground/10' : 'bg-muted/10 hover:bg-muted/20 group'}
               `}
               style={{
@@ -102,8 +107,8 @@ export default function Education() {
               </div>
               {/* Content */}
               <div>
-                <p className={`text-xs sm:text-sm mb-2 sm:mb-3 transition-colors duration-300 ${!item.highlight && hoveredIndex === index ? 'text-foreground/80' : 'text-muted-foreground'}`}>{item.title}</p>
-                <h3 className={`text-lg sm:text-xl font-bold transition-colors duration-300 leading-snug ${!item.highlight && hoveredIndex === index ? 'text-foreground' : 'text-card-foreground'}`}>{item.description}</h3>
+                <p className={`text-xs sm:text-sm mb-1 xs:mb-2 sm:mb-3 transition-colors duration-300 break-words ${!item.highlight && hoveredIndex === index ? 'text-foreground/80' : 'text-muted-foreground'}`}>{item.title}</p>
+                <h3 className={`text-base xs:text-lg sm:text-xl font-bold transition-colors duration-300 leading-snug break-words ${!item.highlight && hoveredIndex === index ? 'text-foreground' : 'text-card-foreground'}`}>{item.description}</h3>
               </div>
               {/* Background Glow for Highlighted Card */}
               {item.highlight && (<div className="absolute inset-0 bg-gradient-to-br from-foreground/10 to-transparent opacity-50 pointer-events-none" />)}
