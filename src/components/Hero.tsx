@@ -14,7 +14,7 @@ const Hero = () => {
   const bgOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
   return (
-    <section id="hero" ref={sectionRef} className="relative min-h-[100svh] overflow-hidden bg-card text-foreground transition-colors duration-700 w-full overflow-x-hidden">
+    <section id="hero" ref={sectionRef} className="relative min-h-[100svh] overflow-hidden bg-card text-foreground transition-colors duration-700 w-full overflow-x-hidden pt-4 pb-0 md:py-0 mb-0">
       {/* Animated gradient orbs */}
       <motion.div 
         className="absolute inset-0 pointer-events-none"

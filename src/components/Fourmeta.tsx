@@ -26,7 +26,7 @@ const Footer = () => {
     <footer
       id="fourmeta"
       ref={ref}
-      className="relative border-t border-foreground/10 section-padding-lg overflow-hidden"
+      className="relative border-t border-foreground/10 pt-0 section-padding-lg overflow-hidden"
     >
       <div className="container-custom">
         <motion.div

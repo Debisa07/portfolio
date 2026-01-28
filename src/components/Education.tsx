@@ -53,10 +53,10 @@ export default function Education() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <section id="education" className="min-h-[50vh] bg-background text-foreground py-6 px-2 sm:px-4 flex justify-center items-center">
+    <section id="education" className="min-h-[50vh] bg-background text-foreground pt-0 py-4 px-2 sm:px-4 flex justify-center items-center">
       <div className="max-w-2xl w-full mx-auto">
         {/* Header Section */}
-        <div className="mb-6 flex flex-col md:grid md:grid-cols-2 gap-4 items-center">
+        <div className="mb-4 flex flex-col md:grid md:grid-cols-2 gap-3 items-center">
           <div>
             <h2 className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.95] break-words">
               EDUCATION <br />
@@ -82,7 +82,7 @@ export default function Education() {
           </div>
         </div>
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {experiences.map((item, index) => (
             <motion.div
               key={item.id}

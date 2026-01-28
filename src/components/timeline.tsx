@@ -59,7 +59,7 @@ export default function Timeline() {
   return (
     <div
       id="timeline"
-      className="min-h-[100vh] flex items-center justify-center bg-[radial-gradient(circle_at_right,theme(colors.foreground/4%),transparent_40%),theme(colors.background)] px-2 xs:px-3 sm:px-4 py-6 xs:py-8 sm:py-16 w-full overflow-x-hidden"
+      className="min-h-[100vh] flex items-center justify-center bg-[radial-gradient(circle_at_right,theme(colors.foreground/4%),transparent_40%),theme(colors.background)] px-2 xs:px-3 sm:px-4 pt-0 py-4 xs:py-6 sm:py-12 w-full overflow-x-hidden"
       style={{ color: `hsl(var(--foreground))` }}
     >
       <div

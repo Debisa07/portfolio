@@ -140,7 +140,7 @@ const ProjectsShowcase = () => {
   }
 
   return (
-    <section id="projects" className="py-10 bg-background overflow-hidden relative">
+    <section id="projects" className="pt-0 py-6 bg-background overflow-hidden relative">
       {/* Huge background WORK */}
       <motion.h1
           className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none select-none overflow-hidden"

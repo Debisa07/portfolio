@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 
 export default function Summery() {
   return (
-    <section id="summary" className="min-h-[80vh] bg-background text-foreground flex flex-col justify-between py-6 px-3 sm:px-6 md:px-12">
-      <div className="max-w-4xl mx-auto w-full flex flex-col md:flex-row gap-6 md:gap-16">
+    <section id="summary" className="min-h-[80vh] bg-background text-foreground flex flex-col justify-between pt-0 py-4 px-3 sm:px-6 md:px-12">
+      <div className="max-w-4xl mx-auto w-full flex flex-col md:flex-row gap-4 md:gap-16">
         {/* Left: Name & Professional Headline */}
         <div className="flex-1 flex flex-col gap-4 sm:gap-6 justify-center">
           <div>

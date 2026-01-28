@@ -89,7 +89,7 @@ export default function TechStack() {
   return (
     <section
       id="tech-stack"
-      className="relative py-10 md:py-12 bg-background"
+      className="relative pt-0 py-6 md:py-12 bg-background"
       style={{
         background:
           "radial-gradient(circle at right, hsl(var(--foreground)/0.04), transparent 40%), hsl(var(--background))",
@@ -143,7 +143,7 @@ export default function TechStack() {
         {/* Grid */}
         <motion.div
           layout
-          className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 xs:gap-3 sm:gap-4"
+          className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1 xs:gap-2 sm:gap-3"
         >
           {filteredTech.map((tech) => (
             <motion.div
